@@ -1,19 +1,54 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: light)" />
-		<link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" media="(prefers-color-scheme: light)" />
-		<link rel="icon" type="image/x-icon" href="/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="JCI Zulia - Inicio">
+  <Navbar />
+  <main class="container page-content">
+    <section class="hero-section">
+      <span class="badge">JCI Zulia 2026</span>
+      <h1>Desarrollando Líderes para un Mundo Cambiante</h1>
+      <p>
+        Somos una red mundial de jóvenes ciudadanos activos que buscan crear cambios positivos en nuestras comunidades.
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .page-content {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    max-width: 800px;
+  }
+
+  .badge {
+    background-color: rgba(0, 151, 215, 0.1);
+    color: var(--color-jci-blue);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--color-jci-black);
+    line-height: 1.15;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: var(--color-gray-600);
+    line-height: 1.6;
+  }
+</style>

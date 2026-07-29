@@ -1,0 +1,65 @@
+---
+interface Props {
+  href: string;
+  class?: string;
+  exact?: boolean;
+  [key: string]: any;
+}
+
+const { href, class: className = '', exact = false, ...props } = Astro.props;
+
+const { pathname } = Astro.url;
+
+// Normalize pathnames by removing trailing slashes for comparison
+const normalizePath = (path: string) => (path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path);
+
+const currentPath = normalizePath(pathname);
+const targetPath = normalizePath(href);
+
+const isActive = exact
+  ? currentPath === targetPath
+  : targetPath === '/'
+    ? currentPath === '/'
+    : currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
+---
+
+<a
+  href={href}
+  class:list={['nav-link', { active: isActive }, className]}
+  aria-current={isActive ? 'page' : undefined}
+  data-astro-prefetch="hover"
+  {...props}
+>
+  <slot />
+</a>
+
+<style>
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-gray-600);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    border-radius: 0.375rem;
+  }
+
+  .nav-link:hover {
+    color: var(--color-jci-blue);
+  }
+
+  .nav-link:focus-visible {
+    outline: 2px solid var(--color-jci-blue);
+    outline-offset: 2px;
+    color: var(--color-jci-blue);
+  }
+
+  .nav-link.active {
+    color: var(--color-jci-blue);
+    font-weight: 600;
+  }
+</style>

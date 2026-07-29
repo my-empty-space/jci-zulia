@@ -1,0 +1,274 @@
+---
+import NavLink from './NavLink.astro';
+import Button from './Button.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const navItems = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Nosotros', href: '/about-us' },
+  { label: 'Academia', href: '/academy' },
+  { label: 'Noticias', href: '/news' },
+  { label: 'Contacto', href: '/contact' },
+];
+---
+
+<header class:list={['navbar-header', className]}>
+  <div class="container navbar-container">
+    <!-- Brand Logo -->
+    <a href="/" class="navbar-brand" aria-label="JCI Zulia - Inicio" data-astro-prefetch="hover">
+      <img
+        src="/JCI Zulia/logo.svg"
+        alt="JCI Zulia Logo"
+        width="140"
+        height="48"
+        class="navbar-logo"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </a>
+
+    <!-- Desktop Navigation Menu -->
+    <nav class="navbar-nav-desktop" aria-label="Navegación principal">
+      <ul class="nav-list">
+        {
+          navItems.map((item) => (
+            <li>
+              <NavLink href={item.href}>{item.label}</NavLink>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="navbar-cta-desktop">
+        <Button href="/contact" variant="solid" size="md">
+          Hazte Miembro
+        </Button>
+      </div>
+    </nav>
+
+    <!-- Mobile Hamburger Toggle Button -->
+    <button
+      type="button"
+      id="mobile-menu-toggle"
+      class="mobile-toggle-btn"
+      aria-expanded="false"
+      aria-controls="mobile-menu-drawer"
+      aria-label="Abrir menú de navegación"
+    >
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu-drawer" class="mobile-drawer" aria-hidden="true">
+    <nav class="mobile-nav" aria-label="Navegación móvil">
+      <ul class="mobile-nav-list">
+        {
+          navItems.map((item) => (
+            <li>
+              <NavLink href={item.href} class="mobile-nav-link">
+                {item.label}
+              </NavLink>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mobile-cta">
+        <Button href="/contact" variant="solid" size="lg" class="w-full">
+          Hazte Miembro
+        </Button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .navbar-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(19, 15, 45, 0.06);
+    transition: background-color var(--transition-normal);
+  }
+
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  /* Logo */
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    outline-offset: 4px;
+    transition: transform var(--transition-fast);
+  }
+
+  .navbar-brand:hover {
+    transform: scale(1.02);
+  }
+
+  .navbar-logo {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* Desktop Menu */
+  .navbar-nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    list-style: none;
+  }
+
+  .navbar-cta-desktop {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Mobile Toggle */
+  .mobile-toggle-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+  }
+
+  .mobile-toggle-btn:hover {
+    background-color: var(--color-gray-100);
+  }
+
+  .hamburger-bar {
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-jci-black);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  /* Active Hamburger Animation */
+  .mobile-toggle-btn[aria-expanded="true"] .hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .mobile-toggle-btn[aria-expanded="true"] .hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-toggle-btn[aria-expanded="true"] .hamburger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile Drawer */
+  .mobile-drawer {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background-color: var(--color-jci-white);
+    border-bottom: 1px solid var(--color-gray-200);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem 1rem;
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.25s ease, opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  .mobile-drawer.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+  }
+
+  .mobile-cta {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-gray-100);
+  }
+
+  /* Responsive Breakpoints */
+  @media (max-width: 868px) {
+    .navbar-nav-desktop {
+      display: none;
+    }
+
+    .mobile-toggle-btn {
+      display: flex;
+    }
+
+    .mobile-drawer {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  function setupMobileMenu() {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const drawer = document.getElementById('mobile-menu-drawer');
+
+    if (!toggleBtn || !drawer) return;
+
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      const nextExpanded = !isExpanded;
+
+      toggleBtn.setAttribute('aria-expanded', String(nextExpanded));
+      toggleBtn.setAttribute(
+        'aria-label',
+        nextExpanded ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
+      );
+      drawer.setAttribute('aria-hidden', String(!nextExpanded));
+      drawer.classList.toggle('is-open', nextExpanded);
+    });
+
+    // Close drawer when clicking a mobile link
+    const mobileLinks = drawer.querySelectorAll('a');
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        drawer.setAttribute('aria-hidden', 'true');
+        drawer.classList.remove('is-open');
+      });
+    });
+  }
+
+  // Initial setup and re-run on View Transitions page swap
+  setupMobileMenu();
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>

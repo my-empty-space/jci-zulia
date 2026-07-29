@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="Academia - JCI Zulia">
+  <Navbar />
+  <main class="container page-content">
+    <h1>Academia JCI</h1>
+    <p>Programas de formación en liderazgo, emprendimiento y desarrollo personal.</p>
+  </main>
+</Layout>
+
+<style>
+  .page-content {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  h1 {
+    font-size: 2.5rem;
+    color: var(--color-jci-black);
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 1.15rem;
+    color: var(--color-gray-600);
+  }
+</style>
