@@ -1,0 +1,217 @@
+---
+import Button from '../components/Button.astro';
+---
+
+<section class="hero" aria-label="Sección Principal">
+  <!-- Background Image with LCP Optimization -->
+  <img
+    src="/hero-banner.png"
+    alt="Jóvenes líderes de JCI Zulia"
+    class="hero-bg"
+    loading="eager"
+    fetchpriority="high"
+    width="1920"
+    height="1080"
+  />
+
+  <!-- Linear Gradient Overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Vector Graphic Arcs Overlay -->
+  <img
+    src="/hero-overlay.svg"
+    alt=""
+    class="hero-svg-overlay"
+    aria-hidden="true"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  <!-- Content Container -->
+  <div class="container hero-container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Jóvenes que no<br />
+        esperan el cambio<br />
+        <span class="hero-title-accent">Lo crean</span>
+      </h1>
+
+      <p class="hero-description">
+        JCI Zulia conecta a líderes emergentes de 18 a 40 años con oportunidades
+        reales de desarrollo, impacto comunitario y red global.
+      </p>
+
+      <div class="hero-actions">
+        <Button href="/contact" variant="solid" size="md" class="hero-btn-primary">
+          Únete a JCI Zulia
+          <svg
+            class="arrow-icon"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </Button>
+        <Button href="/about-us" variant="outline-white" size="md">
+          Conoce más
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    height: 92dvh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: var(--color-jci-white);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(19, 15, 45, 0.96) 0%,
+      rgba(19, 15, 45, 0.82) 50%,
+      rgba(31, 71, 137, 0.65) 100%
+    );
+    z-index: 2;
+  }
+
+  .hero-svg-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: auto;
+    max-width: 55vw;
+    object-fit: cover;
+    object-position: left center;
+    pointer-events: none;
+    user-select: none;
+    z-index: 3;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 4;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .hero-content {
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-title {
+    font-family: var(--font-main);
+    font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-jci-white);
+  }
+
+  .hero-title-accent {
+    color: var(--color-jci-yellow);
+    display: inline-block;
+    margin-top: 0.1em;
+  }
+
+  .hero-description {
+    margin-top: 1.75rem;
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 580px;
+    font-weight: 400;
+  }
+
+  .hero-actions {
+    margin-top: 2.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-btn-primary {
+    gap: 0.5rem;
+  }
+
+  .arrow-icon {
+    transition: transform var(--transition-fast);
+  }
+
+  .hero-btn-primary:hover .arrow-icon {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding-top: 2rem;
+      padding-bottom: 4rem;
+    }
+
+    .hero-svg-overlay {
+      /* max-width: 95vw;
+      right: -15%;
+      opacity: 0.4; */
+    }
+
+    .hero-container {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 8vw, 3rem);
+    }
+
+    .hero-description {
+      margin-top: 1.25rem;
+      font-size: 1rem;
+    }
+
+    .hero-actions {
+      margin-top: 1.75rem;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+
+
+    }
+
+    .hero-actions :global(.btn) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
