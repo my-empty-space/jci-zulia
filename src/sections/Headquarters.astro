@@ -1,0 +1,268 @@
+---
+import IconGlobal from '../assets/icons/global.svg';
+import IconMap from '../assets/icons/map.svg';
+import IconLocation from '../assets/icons/location.svg';
+---
+
+<section class="hq-section" aria-label="Estructura Organizacional JCI">
+  <div class="container hq-container">
+    <div class="hq-grid">
+      <!-- Left Column: Image & Floating Golden Rule Card -->
+      <div class="hq-image-column">
+        <div class="hq-image-wrapper">
+          <img
+            src="/sede.webp"
+            alt="Asamblea y sede JCI"
+            class="hq-image"
+            loading="lazy"
+            width="600"
+            height="420"
+          />
+
+          <!-- Floating Golden Rule Quote Card -->
+          <div class="hq-quote-card">
+            <p class="hq-quote-text">
+              Nuestra regla de oro: los cargos de liderazgo se rotan anualmente
+              para maximizar las oportunidades de desarrollo.
+            </p>
+            <cite class="hq-quote-author">"Un año para liderar"</cite>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Title, Description & Organizational Levels -->
+      <div class="hq-content">
+        <h2 class="hq-title">Pellentesque quis dignissim nis</h2>
+        <p class="hq-description">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+          Aliquam in hendrerit urna.
+        </p>
+
+        <ul class="hq-list">
+          <li class="hq-item">
+            <div class="hq-icon-box">
+              <IconGlobal class="hq-icon" />
+            </div>
+            <div class="hq-item-body">
+              <h3 class="hq-item-title">Nivel Mundial</h3>
+              <p class="hq-item-text">
+                Sede central coordinando la estrategia global y eventos
+                internacionales.
+              </p>
+            </div>
+          </li>
+
+          <li class="hq-item">
+            <div class="hq-icon-box">
+              <IconMap class="hq-icon" />
+            </div>
+            <div class="hq-item-body">
+              <h3 class="hq-item-title">Organización Nacional</h3>
+              <p class="hq-item-text">
+                Coordina el impacto a nivel país y representa a las filiales
+                locales ante el mundo.
+              </p>
+            </div>
+          </li>
+
+          <li class="hq-item">
+            <div class="hq-icon-box">
+              <IconLocation class="hq-icon" />
+            </div>
+            <div class="hq-item-body">
+              <h3 class="hq-item-title">
+                Organización Local – <span class="hq-highlight-blue">Zulia</span>
+              </h3>
+              <p class="hq-item-text">
+                Donde sucede la magia. Jóvenes trabajando directamente en sus
+                comunidades.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hq-section {
+    background-color: var(--color-jci-white);
+    padding: 6rem 0;
+    overflow: hidden;
+  }
+
+  .hq-container {
+    position: relative;
+  }
+
+  .hq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  /* Left Column Styling */
+  .hq-image-column {
+    position: relative;
+  }
+
+  .hq-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+    padding-bottom: 1.5rem;
+  }
+
+  .hq-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(19, 15, 45, 0.08);
+    display: block;
+  }
+
+  .hq-quote-card {
+    position: absolute;
+    bottom: 0;
+    right: -1.25rem;
+    background-color: var(--color-jci-white);
+    padding: 1.35rem 1.6rem;
+    border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(19, 15, 45, 0.12);
+    max-width: 380px;
+    z-index: 3;
+    border: 1px solid var(--color-gray-100);
+  }
+
+  .hq-quote-text {
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-gray-600);
+    font-weight: 500;
+  }
+
+  .hq-quote-author {
+    display: block;
+    text-align: right;
+    margin-top: 0.85rem;
+    font-family: var(--font-secondary);
+    font-style: italic;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-jci-navy);
+  }
+
+  /* Right Column Styling */
+  .hq-content {
+    max-width: 560px;
+  }
+
+  .hq-title {
+    font-family: var(--font-main);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-gray-600);
+  }
+
+  .hq-description {
+    margin-top: 1.25rem;
+    font-family: var(--font-main);
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    line-height: 1.65;
+    color: var(--color-gray-600);
+    font-weight: 400;
+  }
+
+  .hq-list {
+    margin-top: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .hq-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .hq-icon-box {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.15rem;
+  }
+
+  .hq-icon-box :global(svg) {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .hq-item-body {
+    flex: 1;
+  }
+
+  .hq-item-title {
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-gray-600);
+    line-height: 1.3;
+  }
+
+  .hq-highlight-blue {
+    color: var(--color-jci-blue);
+  }
+
+  .hq-item-text {
+    margin-top: 0.25rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--color-gray-600);
+  }
+
+  /* Responsive Breakdown */
+  @media (max-width: 992px) {
+    .hq-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .hq-content {
+      max-width: 100%;
+    }
+
+    .hq-image-wrapper {
+      padding-bottom: 0;
+    }
+
+    .hq-quote-card {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      margin-top: 1.25rem;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hq-section {
+      padding: 4rem 0;
+    }
+  }
+</style>
