@@ -1,0 +1,76 @@
+---
+---
+
+<section class="org-description" aria-label="Descripción Organizacional">
+  <div class="container org-description-container">
+    <div class="org-description-content">
+      <h2 class="org-description-title">Junior Chamber International</h2>
+      <p class="org-description-subtitle">Sede Zulia</p>
+
+      <p class="org-description-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+        Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis
+        ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam
+        quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna
+        interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum
+        sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis
+        orci ut diam condimentum, vel euismod erat placerat. In iaculis arcu eros,
+        eget tempus orci facilisis id.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .org-description {
+    position: relative;
+    background-color: var(--color-jci-blue);
+    color: var(--color-jci-white);
+    padding: 5rem 0 6rem;
+  }
+
+  .org-description-container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .org-description-content {
+    max-width: 680px;
+  }
+
+  .org-description-title {
+    font-family: var(--font-main);
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-jci-white);
+  }
+
+  .org-description-subtitle {
+    font-family: var(--font-main);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.35rem;
+  }
+
+  .org-description-text {
+    margin-top: 2rem;
+    font-family: var(--font-main);
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 400;
+  }
+
+  @media (max-width: 768px) {
+    .org-description {
+      padding: 3.5rem 0 4rem;
+    }
+
+    .org-description-text {
+      margin-top: 1.5rem;
+    }
+  }
+</style>

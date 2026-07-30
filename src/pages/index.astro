@@ -2,11 +2,61 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../sections/Hero.astro';
+import OrgDescription from '../sections/OrgDescription.astro';
 ---
 
 <Layout title="JCI Zulia - Jóvenes Creando Impacto">
   <Navbar />
   <main>
-    <Hero />
+    <div class="sticky-logo-scope">
+      <!-- Sticky JCI Logo Track (right side, overlapping) -->
+      <div class="jci-logo-track" aria-hidden="true">
+        <img
+          src="/jci-icon-white.svg"
+          alt=""
+          class="jci-floating-logo"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Page Sections -->
+      <Hero />
+      <OrgDescription />
+    </div>
   </main>
 </Layout>
+
+<style>
+  .sticky-logo-scope {
+    position: relative;
+    overflow-x: clip;
+  }
+
+  /* Right column track: full height of scope, flush to right edge */
+  .jci-logo-track {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: clamp(200px, 20vw, 320px);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .jci-floating-logo {
+    position: sticky;
+    top: 12dvh;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.5;
+    filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.1));
+  }
+
+  @media (max-width: 768px) {
+    .jci-logo-track {
+      display: none;
+    }
+  }
+</style>
