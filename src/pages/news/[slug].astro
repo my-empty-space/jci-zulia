@@ -1,0 +1,985 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import IconCalendar from '../../assets/icons/calendar.svg';
+import newsData from '../../data/news.json';
+
+export async function getStaticPaths() {
+  return newsData.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+
+// Calculate Next and Previous Articles for bottom navigation
+const currentIndex = newsData.findIndex((n) => n.slug === article.slug);
+const prevArticle = currentIndex > 0 ? newsData[currentIndex - 1] : null;
+const nextArticle =
+  currentIndex < newsData.length - 1 ? newsData[currentIndex + 1] : null;
+
+// Filter related articles by category (excluding current article)
+const relatedArticles = newsData
+  .filter((n) => n.slug !== article.slug && n.category === article.category)
+  .slice(0, 2);
+
+// Fallback to latest articles if not enough related in same category
+const fallbackArticles =
+  relatedArticles.length < 2
+    ? newsData.filter((n) => n.slug !== article.slug).slice(0, 2)
+    : relatedArticles;
+
+const finalRelated =
+  relatedArticles.length >= 2 ? relatedArticles : fallbackArticles;
+
+// Format date into human friendly string (e.g. 28 de Julio, 2026)
+const dateParts = article.date.split('-');
+const formattedDate =
+  dateParts.length === 3
+    ? new Date(
+        parseInt(dateParts[0]),
+        parseInt(dateParts[1]) - 1,
+        parseInt(dateParts[2])
+      ).toLocaleDateString('es-ES', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+    : article.date;
+---
+
+<Layout title={`${article.title} - JCI Zulia`}>
+  <Navbar />
+
+  <main class="news-detail-page">
+    <!-- Hero Header -->
+    <header class="news-hero">
+      <img
+        src={article.image}
+        alt=""
+        class="hero-bg-blur"
+        aria-hidden="true"
+        loading="eager"
+      />
+      <div class="hero-overlay-gradient"></div>
+
+      <div class="container hero-container-rel">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Navegación secundaria">
+          <a href="/">Inicio</a>
+          <span class="separator">/</span>
+          <a href="/news">Noticias</a>
+          <span class="separator">/</span>
+          <span class="current">{article.category}</span>
+        </nav>
+
+        <div class="hero-content">
+          <div class="hero-meta-top">
+            <span class="category-badge">{article.category}</span>
+            <div class="meta-pill">
+              <IconCalendar class="meta-icon" />
+              <time datetime={article.date}>{formattedDate}</time>
+            </div>
+          </div>
+
+          <h1 class="article-title">{article.title}</h1>
+          <p class="article-excerpt">{article.excerpt}</p>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content & Sidebar Section -->
+    <section class="article-body-section">
+      <div class="container body-container">
+        <!-- Main Article Column -->
+        <div class="article-main-col">
+          <!-- Featured Image Container -->
+          <div class="featured-image-box">
+            <img
+              src={article.image}
+              alt={article.title}
+              class="featured-image"
+              loading="eager"
+              width="1200"
+              height="675"
+            />
+          </div>
+
+          <!-- HTML Article Body -->
+          <article class="article-prose" set:html={article.content} />
+
+          <!-- Tags List -->
+          {
+            article.tags && article.tags.length > 0 && (
+              <div class="tags-container">
+                <span class="tags-label">Etiquetas:</span>
+                <div class="tags-list">
+                  {article.tags.map((tag) => (
+                    <span class="tag-pill">#{tag}</span>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+
+          <!-- Social Share Bar -->
+          <div class="share-bar">
+            <span class="share-title">Compartir esta noticia:</span>
+            <div class="share-buttons">
+              <a
+                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${article.title} - https://jci-zulia.org/news/${article.slug}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="share-btn share-whatsapp"
+                aria-label="Compartir en WhatsApp"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-0.999 3.648 3.742-.981z"/>
+                </svg>
+                <span>WhatsApp</span>
+              </a>
+
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(`https://jci-zulia.org/news/${article.slug}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="share-btn share-twitter"
+                aria-label="Compartir en X / Twitter"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span>Twitter / X</span>
+              </a>
+
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://jci-zulia.org/news/${article.slug}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="share-btn share-linkedin"
+                aria-label="Compartir en LinkedIn"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+
+              <button
+                type="button"
+                class="share-btn share-copy"
+                id="copyLinkBtn"
+                aria-label="Copiar enlace"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <span id="copyText">Copiar Enlace</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pagination between articles -->
+          <nav class="article-pagination" aria-label="Navegación entre artículos">
+            {
+              prevArticle ? (
+                <a href={`/news/${prevArticle.slug}`} class="nav-card prev-card">
+                  <span class="nav-label">← Noticia Anterior</span>
+                  <span class="nav-title">{prevArticle.title}</span>
+                </a>
+              ) : (
+                <div class="nav-card nav-disabled" />
+              )
+            }
+
+            {
+              nextArticle ? (
+                <a href={`/news/${nextArticle.slug}`} class="nav-card next-card">
+                  <span class="nav-label">Siguiente Noticia →</span>
+                  <span class="nav-title">{nextArticle.title}</span>
+                </a>
+              ) : (
+                <div class="nav-card nav-disabled" />
+              )
+            }
+          </nav>
+        </div>
+
+        <!-- Sidebar Sticky Column -->
+        <aside class="sidebar-col">
+          <!-- Author / JCI Info Card -->
+          <div class="widget-card about-widget">
+            <h3 class="widget-title">Sobre JCI Zulia</h3>
+            <p class="widget-text">
+              JCI Zulia es la organización líder de jóvenes ciudadanos activos dedicados a crear un impacto positivo mediante proyectos de desarrollo sostenible y liderazgo.
+            </p>
+            <a href="/about-us" class="widget-link">Conoce nuestra historia →</a>
+          </div>
+
+          <!-- Related Articles Widget -->
+          <div class="widget-card related-widget">
+            <h3 class="widget-title">Noticias Relacionadas</h3>
+            <div class="related-list">
+              {
+                finalRelated.map((rel) => (
+                  <div class="related-card-item">
+                    <NewsCard
+                      title={rel.title}
+                      excerpt={rel.excerpt}
+                      image={rel.image}
+                      slug={rel.slug}
+                    />
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <!-- Join JCI Banner Widget -->
+          <div class="widget-card join-widget">
+            <h3 class="join-title">¿Quieres ser un agente de cambio?</h3>
+            <p class="join-text">
+              Desarrolla tus habilidades de liderazgo y participa en iniciativas que impactan tu comunidad.
+            </p>
+            <a href="/contact" class="join-btn" data-astro-prefetch="hover">
+              Únete a Nosotros
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Callout -->
+    <section class="bottom-cta-section" aria-label="Únete a la Red">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-info">
+            <h2 class="cta-heading">¿Tienes una iniciativa para tu comunidad?</h2>
+            <p class="cta-sub">
+              Conecta con jóvenes líderes de Maracaibo y el Zulia para hacer tus proyectos una realidad.
+            </p>
+          </div>
+          <a href="/contact" class="cta-btn" data-astro-prefetch="hover">
+            Contactar al Equipo
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .news-detail-page {
+    background-color: var(--color-gray-50);
+    min-height: 80vh;
+  }
+
+  /* Hero Section */
+  .news-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 4.5rem 0 5.5rem;
+    background-color: var(--color-jci-black);
+    color: var(--color-jci-white);
+  }
+
+  .hero-bg-blur {
+    position: absolute;
+    inset: -15px;
+    width: calc(100% + 30px);
+    height: calc(100% + 30px);
+    object-fit: cover;
+    object-position: center;
+    filter: blur(6px) brightness(0.8);
+    z-index: 1;
+  }
+
+  .hero-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    opacity: 0.8;
+    background: linear-gradient(
+      135deg,
+      var(--color-jci-black) 0%,
+      #08539e50 100%
+    );
+    z-index: 2;
+  }
+
+  .hero-container-rel {
+    position: relative;
+    z-index: 3;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumbs a {
+    color: rgba(255, 255, 255, 0.85);
+    transition: color var(--transition-fast);
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--color-jci-blue);
+  }
+
+  .breadcrumbs .current {
+    color: var(--color-jci-teal);
+    font-weight: 600;
+  }
+
+  .hero-content {
+    max-width: 860px;
+  }
+
+  .hero-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+
+  .category-badge {
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background-color: var(--color-jci-blue);
+    color: var(--color-jci-white);
+    padding: 0.3rem 0.85rem;
+    border-radius: 20px;
+  }
+
+  .meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .meta-icon {
+    width: 15px;
+    height: 15px;
+    color: var(--color-jci-teal);
+  }
+
+  .article-title {
+    font-family: var(--font-main);
+    font-size: clamp(2.1rem, 3.8vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.18;
+    color: var(--color-jci-white);
+    letter-spacing: -0.015em;
+  }
+
+  .article-excerpt {
+    margin-top: 1.25rem;
+    font-family: var(--font-main);
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .author-card {
+    margin-top: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+  }
+
+  .author-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--color-jci-blue);
+    color: var(--color-jci-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-name {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-jci-white);
+  }
+
+  .author-role {
+    font-family: var(--font-main);
+    font-size: 0.825rem;
+    color: var(--color-jci-teal);
+  }
+
+  /* Body Section */
+  .article-body-section {
+    padding: 4rem 0 6rem;
+  }
+
+  .body-container {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  .article-main-col {
+    background-color: var(--color-jci-white);
+    border-radius: 16px;
+    padding: 3rem;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 8px 24px rgba(19, 15, 45, 0.03);
+  }
+
+  .featured-image-box {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 10px 25px rgba(19, 15, 45, 0.08);
+  }
+
+  .featured-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Article Prose Formatting */
+  .article-prose {
+    font-family: var(--font-main);
+    font-size: 1.075rem;
+    line-height: 1.8;
+    color: var(--color-gray-800);
+  }
+
+  .article-prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .article-prose :global(h2) {
+    font-family: var(--font-main);
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--color-jci-black);
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.3;
+
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .article-prose :global(h2)::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1.15em;
+    background-color: var(--color-jci-blue);
+    border-radius: 2px;
+  }
+
+  .article-prose :global(.article-quote) {
+    font-family: var(--font-secondary);
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--color-jci-navy);
+    background-color: rgba(0, 151, 215, 0.06);
+    border-left: 4px solid var(--color-jci-blue);
+    padding: 1.5rem 1.75rem;
+    border-radius: 0 12px 12px 0;
+    margin: 2rem 0;
+  }
+
+  .article-prose :global(.key-takeaways) {
+    background-color: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin: 2.25rem 0;
+  }
+
+  .article-prose :global(.key-takeaways h3) {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-jci-black);
+    margin-bottom: 1rem;
+  }
+
+  .article-prose :global(.key-takeaways ul) {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .article-prose :global(.key-takeaways li) {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .article-prose :global(.key-takeaways li)::before {
+    content: '•';
+    position: absolute;
+    left: 0.25rem;
+    color: var(--color-jci-blue);
+    font-size: 1.4rem;
+    line-height: 1;
+    top: -2px;
+  }
+
+  /* Tags List */
+  .tags-container {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-gray-200);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tags-label {
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-gray-600);
+  }
+
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-pill {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-jci-navy);
+    background-color: rgba(31, 71, 137, 0.08);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+  }
+
+  /* Share Bar */
+  .share-bar {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background-color: var(--color-gray-50);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .share-title {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-jci-black);
+  }
+
+  .share-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.5rem 0.95rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+  }
+
+  .share-whatsapp {
+    background-color: #25D366;
+    color: #FFFFFF;
+  }
+  .share-whatsapp:hover {
+    background-color: #1ebc57;
+    transform: translateY(-2px);
+  }
+
+  .share-twitter {
+    background-color: #000000;
+    color: #FFFFFF;
+  }
+  .share-twitter:hover {
+    background-color: #1a1a1a;
+    transform: translateY(-2px);
+  }
+
+  .share-linkedin {
+    background-color: #0A66C2;
+    color: #FFFFFF;
+  }
+  .share-linkedin:hover {
+    background-color: #08539e;
+    transform: translateY(-2px);
+  }
+
+  .share-copy {
+    background-color: var(--color-jci-white);
+    color: var(--color-gray-800);
+    border: 1px solid var(--color-gray-200);
+  }
+  .share-copy:hover {
+    border-color: var(--color-jci-blue);
+    color: var(--color-jci-blue);
+    transform: translateY(-2px);
+  }
+
+  /* Pagination Navigation */
+  .article-pagination {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-gray-200);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.25rem 1.5rem;
+    background-color: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .nav-card:hover {
+    border-color: var(--color-jci-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 151, 215, 0.1);
+  }
+
+  .nav-label {
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-jci-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-title {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-jci-black);
+    line-height: 1.35;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .next-card {
+    text-align: right;
+  }
+
+  .nav-disabled {
+    visibility: hidden;
+  }
+
+  /* Sidebar Column */
+  .sidebar-col {
+    position: sticky;
+    top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .widget-card {
+    background-color: var(--color-jci-white);
+    border-radius: 14px;
+    padding: 1.75rem;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 6px 20px rgba(19, 15, 45, 0.04);
+  }
+
+  .widget-title {
+    font-family: var(--font-main);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--color-jci-black);
+    margin-bottom: 1rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 2px solid var(--color-gray-100);
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .widget-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    background-color: var(--color-jci-blue);
+    border-radius: 2px;
+  }
+
+  .widget-text {
+    font-family: var(--font-main);
+    font-size: 0.925rem;
+    line-height: 1.6;
+    color: var(--color-gray-600);
+  }
+
+  .widget-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-jci-blue);
+    transition: color var(--transition-fast);
+  }
+
+  .widget-link:hover {
+    color: var(--color-jci-blue-hover);
+    text-decoration: underline;
+  }
+
+  .related-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .join-widget {
+    background: linear-gradient(135deg, var(--color-jci-navy) 0%, var(--color-jci-black) 100%);
+    color: var(--color-jci-white);
+  }
+
+  .join-title {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-jci-white);
+  }
+
+  .join-text {
+    margin-top: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .join-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1.25rem;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    background-color: var(--color-jci-blue);
+    color: var(--color-jci-white);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .join-btn:hover {
+    background-color: var(--color-jci-blue-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Bottom Banner */
+  .bottom-cta-section {
+    padding-bottom: 6rem;
+  }
+
+  .cta-banner {
+    background: linear-gradient(
+      135deg,
+      var(--color-jci-blue) 0%,
+      var(--color-jci-navy) 100%
+    );
+    border-radius: 16px;
+    padding: 3rem 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    color: var(--color-jci-white);
+    box-shadow: 0 16px 40px rgba(19, 15, 45, 0.12);
+  }
+
+  .cta-heading {
+    font-family: var(--font-main);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-jci-white);
+  }
+
+  .cta-sub {
+    margin-top: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.85rem 1.8rem;
+    border-radius: 6px;
+    background-color: var(--color-jci-white);
+    color: var(--color-jci-navy);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cta-btn:hover {
+    background-color: var(--color-gray-100);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Breakdown */
+  @media (max-width: 992px) {
+    .body-container {
+      grid-template-columns: 1fr;
+    }
+
+    .article-main-col {
+      padding: 2rem 1.5rem;
+    }
+
+    .sidebar-col {
+      position: static;
+    }
+
+    .cta-banner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 2.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .share-bar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .share-buttons {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .share-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .article-pagination {
+      grid-template-columns: 1fr;
+    }
+
+    .next-card {
+      text-align: left;
+    }
+
+    .nav-disabled {
+      display: none;
+    }
+
+    .cta-btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  function setupCopyLink() {
+    const copyBtn = document.getElementById('copyLinkBtn');
+    const copyText = document.getElementById('copyText');
+
+    if (!copyBtn || !copyText) return;
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        const originalText = copyText.textContent;
+        copyText.textContent = '¡Copiado!';
+        copyBtn.classList.add('copied');
+
+        setTimeout(() => {
+          copyText.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2500);
+      } catch (err) {
+        console.error('Error al copiar el enlace:', err);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupCopyLink);
+  document.addEventListener('astro:page-load', setupCopyLink);
+</script>

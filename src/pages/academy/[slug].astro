@@ -23,7 +23,16 @@ const { course } = Astro.props;
   <main class="course-detail-page">
     <!-- Breadcrumb & Header Hero -->
     <header class="course-hero">
-      <div class="container">
+      <img
+        src={course.image}
+        alt=""
+        class="hero-bg-blur"
+        aria-hidden="true"
+        loading="eager"
+      />
+      <div class="hero-overlay-gradient"></div>
+
+      <div class="container hero-container-rel">
         <!-- Breadcrumbs -->
         <nav class="breadcrumbs" aria-label="Navegación secundaria">
           <a href="/">Inicio</a>
@@ -185,26 +194,39 @@ const { course } = Astro.props;
 
   /* Hero Section */
   .course-hero {
-    background-color: var(--color-jci-black);
-    color: var(--color-jci-white);
-    padding: 3.5rem 0 4.5rem;
     position: relative;
     overflow: hidden;
+    padding: 4.5rem 0 5.5rem;
+    background-color: var(--color-jci-black);
+    color: var(--color-jci-white);
   }
 
-  .course-hero::after {
-    content: '';
+  .hero-bg-blur {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 45vw;
-    height: 100%;
-    background: radial-gradient(
-      circle at top right,
-      rgba(0, 151, 215, 0.25) 0%,
-      rgba(19, 15, 45, 0) 70%
+    inset: -15px;
+    width: calc(100% + 30px);
+    height: calc(100% + 30px);
+    object-fit: cover;
+    object-position: center;
+    filter: blur(6px) brightness(0.8);
+    z-index: 1;
+  }
+
+  .hero-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    opacity: 0.8;
+    background: linear-gradient(
+      135deg,
+      var(--color-jci-black) 0%,
+      #08539e50 100%
     );
-    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hero-container-rel {
+    position: relative;
+    z-index: 3;
   }
 
   .breadcrumbs {
@@ -270,9 +292,6 @@ const { course } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 0.5rem 1rem;
     border-radius: 20px;
     font-family: var(--font-main);
     font-size: 0.9rem;

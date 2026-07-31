@@ -1,28 +1,719 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+import Button from '../components/Button.astro';
+
+const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL || import.meta.env.CONTACT_EMAIL || 'presidencia@jcizulia.org';
+
 ---
 
-<Layout title="Contacto - JCI Zulia">
+<Layout
+  title="Contacto y Membresía - JCI Zulia"
+  description="Ponte en contacto con la JCI Zulia. Escríbenos para unirte como miembro, coordinar alianzas o solicitar información sobre nuestras actividades en Maracaibo, Zulia."
+>
   <Navbar />
-  <main class="container page-content">
-    <h1>Contacto y Membresía</h1>
-    <p>¿Quieres ser parte de la JCI Zulia o colaborar con nosotros? Escríbenos.</p>
+
+  <main class="contact-page">
+    <!-- Hero Header -->
+    <section class="contact-hero">
+      <div class="container">
+        <h1 class="hero-title">
+          Impulsa tu liderazgo. <br />
+          <span class="text-highlight">Conecta con JCI Zulia.</span>
+        </h1>
+        <p class="hero-description">
+          ¿Tienes preguntas, deseas sumarte como ciudadano activo o colaborar en proyectos de impacto comunitario en el Estado Zulia? Déjanos un mensaje y te responderemos a la brevedad.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Form Column -->
+          <div class="form-card-wrapper">
+            <div class="form-card">
+              <div class="form-header">
+                <h2 class="form-title">Envíanos un mensaje</h2>
+                <p class="form-subtitle">
+                  Completa los campos a continuación para comunicarte directamente con nuestro equipo ejecutivo.
+                </p>
+              </div>
+
+              <!-- Status Alert Box -->
+              <div
+                id="form-status"
+                class="form-status-alert"
+                role="alert"
+                aria-live="polite"
+                style="display: none;"
+              >
+              </div>
+
+              <form id="contact-form" class="contact-form" action="/contact.php" method="POST" novalidate>
+                <div class="form-group">
+                  <label for="fullName" class="form-label">
+                    Nombre Completo <span class="required-star">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    class="form-input"
+                    placeholder="Ej. María Valentina Fernández"
+                    required
+                    autocomplete="name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="corporateEmail" class="form-label">
+                    Correo Electrónico <span class="required-star">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="corporateEmail"
+                    name="corporateEmail"
+                    class="form-input"
+                    placeholder="ejemplo@correo.com"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="serviceInterest" class="form-label">
+                    Motivo de Contacto / Interés <span class="required-star">*</span>
+                  </label>
+                  <div class="select-wrapper">
+                    <select id="serviceInterest" name="serviceInterest" class="form-select" required>
+                      <option value="" disabled selected>Selecciona una opción</option>
+                      <option value="Quiero unirme a JCI Zulia (Membresía)">Quiero unirme a JCI Zulia (Membresía)</option>
+                      <option value="Alianzas y Patrocinios">Alianzas y Patrocinio de Proyectos</option>
+                      <option value="Talleres y Capacitaciones">Talleres y Capacitaciones de Liderazgo</option>
+                      <option value="Consulta General">Consulta General u Otros</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="message" class="form-label">
+                    Mensaje <span class="required-star">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    class="form-textarea"
+                    rows="5"
+                    placeholder="Cuéntanos sobre ti, tus preguntas o cómo te gustaría colaborar..."
+                    required
+                  ></textarea>
+                </div>
+
+                <Button type="submit" id="submit-btn" variant="solid" size="lg">
+                  <span class="btn-text">Enviar Mensaje</span>
+                  <span class="btn-loader" style="display: none;">
+                    <svg class="spinner-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle class="spinner-track" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="spinner-path" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Enviando...
+                  </span>
+                </Button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Contact Info & Map Column -->
+          <div class="info-map-column">
+            <!-- Quick Info Cards -->
+            <div class="info-cards-stack">
+              <a
+                href={`mailto:${contactEmail}`}
+                class="info-card"
+                aria-label={`Enviar correo electrónico a ${contactEmail}`}
+              >
+                <div class="info-icon-box">
+                  <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <h3 class="info-title">Correo Electrónico</h3>
+                  <p class="info-detail">{contactEmail}</p>
+                  <span class="info-subtext">Atención al ciudadano activo y alianzas</span>
+                </div>
+              </a>
+
+              <a
+                href="https://wa.me/584127734410"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="info-card"
+                aria-label="Contactar por WhatsApp al +58 412-7734410"
+              >
+                <div class="info-icon-box">
+                  <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <h3 class="info-title">WhatsApp</h3>
+                  <p class="info-detail">+58 412-7734410</p>
+                  <span class="info-subtext">Haz clic para chatear con nosotros</span>
+                </div>
+              </a>
+
+              <a
+                href="https://maps.app.goo.gl/p3jt6RAksMRBzFb58"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="info-card"
+                aria-label="Ver ubicación en Google Maps - Cámara de Comercio de Maracaibo"
+              >
+                <div class="info-icon-box">
+                  <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <h3 class="info-title">Ubicación / Sede</h3>
+                  <p class="info-detail">Cámara de Comercio de Maracaibo</p>
+                  <span class="info-subtext">Estado Zulia, Venezuela • Abrir en Google Maps</span>
+                </div>
+              </a>
+
+              <a
+                href="https://instagram.com/jcizuliaoficial"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="info-card"
+                aria-label="Visitar perfil de Instagram @jcizuliaoficial"
+              >
+                <div class="info-icon-box">
+                  <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <h3 class="info-title">Instagram</h3>
+                  <p class="info-detail">@jcizuliaoficial</p>
+                  <span class="info-subtext">Síguenos y conoce nuestras actividades</span>
+                </div>
+              </a>
+            </div>
+
+            <!-- Google Maps Card Container -->
+            <div class="map-container">
+              <div class="map-header">
+                <span class="map-badge">Google Maps</span>
+                <h3 class="map-title">Cámara de Comercio de Maracaibo</h3>
+              </div>
+              <div class="map-iframe-wrapper">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.8936665796245!2d-71.60108768846376!3d10.650793199342557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e8998f4f0d33207%3A0x41e6a50453a6e32!2sC%C3%A1mara%20de%20Comercio%20de%20Maracaibo!5e0!3m2!1ses!2sve!4v1700000000000!5m2!1ses!2sve"
+                  width="100%"
+                  height="340"
+                  style="border:0;"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="Ubicación de JCI Zulia en Cámara de Comercio de Maracaibo, Zulia, Venezuela"
+                  class="google-map-iframe"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
 
 <style>
-  .page-content {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+  .contact-page {
+    background-color: var(--color-gray-50);
+    padding-bottom: 6rem;
   }
-  h1 {
-    font-size: 2.5rem;
+
+  /* Hero Section */
+  .contact-hero {
+    background-color: var(--color-jci-black);
+    color: var(--color-jci-white);
+    padding: 5rem 0 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 151, 215, 0.22) 0%, rgba(19, 15, 45, 0) 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(0, 151, 215, 0.15);
+    border: 1px solid rgba(0, 151, 215, 0.35);
+    color: var(--color-jci-blue);
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-jci-blue);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .hero-title {
+    font-family: var(--font-main);
+    font-size: clamp(2.25rem, 4vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-jci-white);
+    margin-bottom: 1.25rem;
+  }
+
+  .text-highlight {
+    color: var(--color-jci-blue);
+  }
+
+  .hero-description {
+    font-family: var(--font-main);
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.65;
+    color: var(--color-gray-200);
+    max-width: 680px;
+  }
+
+  /* Main Contact Layout */
+  .contact-section {
+    margin-top: -2.5rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  /* Form Card Styling */
+  .form-card-wrapper {
+    width: 100%;
+  }
+
+  .form-card {
+    background-color: var(--color-jci-white);
+    border-radius: 14px;
+    padding: 2.5rem;
+    box-shadow: 0 16px 40px rgba(19, 15, 45, 0.08);
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .form-header {
+    margin-bottom: 2rem;
+  }
+
+  .form-title {
+    font-family: var(--font-main);
+    font-size: 1.75rem;
+    font-weight: 700;
     color: var(--color-jci-black);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
-  p {
-    font-size: 1.15rem;
+
+  .form-subtitle {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
     color: var(--color-gray-600);
+    line-height: 1.5;
+  }
+
+  /* Form Controls */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .form-label {
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-gray-800);
+  }
+
+  .required-star {
+    color: #e11d48;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: var(--color-jci-black);
+    background-color: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+    outline: none;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    background-color: var(--color-jci-white);
+    border-color: var(--color-jci-blue);
+    box-shadow: 0 0 0 4px rgba(0, 151, 215, 0.15);
+  }
+
+  .select-wrapper {
+    position: relative;
+  }
+
+  .form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.75rem;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 130px;
+  }
+
+  /* Submit Button Layout */
+  .contact-form :global(.btn) {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .btn-loader {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .spinner-icon {
+    width: 18px;
+    height: 18px;
+    animation: spin 1s linear infinite;
+  }
+
+  .spinner-track {
+    opacity: 0.25;
+  }
+
+  .spinner-path {
+    opacity: 0.85;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Form Status Alert */
+  .form-status-alert {
+    padding: 0.9rem 1.1rem;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    line-height: 1.45;
+  }
+
+  .form-status-alert.status-success {
+    background-color: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+  }
+
+  .form-status-alert.status-error {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+  }
+
+  /* Info & Map Column */
+  .info-map-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Info Cards Stack */
+  .info-cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .info-card {
+    background-color: var(--color-jci-white);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    border: 1px solid var(--color-gray-200);
+    box-shadow: 0 4px 16px rgba(19, 15, 45, 0.04);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(19, 15, 45, 0.08);
+  }
+
+  .info-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background-color: rgba(0, 151, 215, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-jci-blue);
+  }
+
+  .info-icon-box :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  .info-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info-title {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-jci-blue);
+    margin-bottom: 0.2rem;
+  }
+
+  .info-detail {
+    font-family: var(--font-main);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-jci-black);
+    line-height: 1.3;
+  }
+
+  .info-subtext {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    color: var(--color-gray-600);
+    margin-top: 0.2rem;
+  }
+
+  /* Map Container */
+  .map-container {
+    background-color: var(--color-jci-white);
+    border-radius: 14px;
+    padding: 1.5rem;
+    border: 1px solid var(--color-gray-200);
+    box-shadow: 0 16px 40px rgba(19, 15, 45, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .map-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .map-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-jci-teal);
+  }
+
+  .map-title {
+    font-family: var(--font-main);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-jci-black);
+  }
+
+  .map-iframe-wrapper {
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    line-height: 0;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  }
+
+  .google-map-iframe {
+    width: 100%;
+    height: 340px;
+    border: 0;
+    display: block;
+  }
+
+  /* Responsive Breakdown */
+  @media (max-width: 992px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .contact-section {
+      margin-top: -1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .contact-hero {
+      padding: 3.5rem 0 3rem;
+    }
+
+    .form-card {
+      padding: 1.75rem 1.25rem;
+    }
+
+    .map-container {
+      padding: 1.25rem;
+    }
+
+    .google-map-iframe {
+      height: 280px;
+    }
   }
 </style>
+
+<script>
+  function setupContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const statusBox = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+
+    if (!form || !submitBtn || !statusBox) return;
+
+    const btnText = submitBtn.querySelector('.btn-text') as HTMLElement | null;
+    const btnLoader = submitBtn.querySelector('.btn-loader') as HTMLElement | null;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Reset alert status box
+      statusBox.style.display = 'none';
+      statusBox.className = 'form-status-alert';
+      statusBox.textContent = '';
+
+      // Get values
+      const fullNameInput = form.querySelector('[name="fullName"]') as HTMLInputElement | null;
+      const emailInput = form.querySelector('[name="corporateEmail"]') as HTMLInputElement | null;
+      const serviceSelect = form.querySelector('[name="serviceInterest"]') as HTMLSelectElement | null;
+      const messageInput = form.querySelector('[name="message"]') as HTMLTextAreaElement | null;
+
+      const fullName = fullNameInput?.value.trim() || '';
+      const corporateEmail = emailInput?.value.trim() || '';
+      const serviceInterest = serviceSelect?.value.trim() || '';
+      const message = messageInput?.value.trim() || '';
+
+      if (!fullName || !corporateEmail || !serviceInterest || !message) {
+        statusBox.textContent = 'Por favor completa todos los campos requeridos (*).';
+        statusBox.classList.add('status-error');
+        statusBox.style.display = 'block';
+        return;
+      }
+
+      // UI state loading
+      submitBtn.disabled = true;
+      if (btnText) btnText.style.display = 'none';
+      if (btnLoader) btnLoader.style.display = 'inline-flex';
+
+      try {
+        const response = await fetch('/contact.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            fullName,
+            corporateEmail,
+            serviceInterest,
+            message,
+          }),
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok && data.status === 'success') {
+          statusBox.textContent = data.message || '¡Gracias por contactarnos! Tu mensaje ha sido enviado exitosamente.';
+          statusBox.classList.add('status-success');
+          statusBox.style.display = 'block';
+          form.reset();
+        } else {
+          statusBox.textContent = data.message || 'Ocurrió un error al procesar tu solicitud. Por favor intenta nuevamente.';
+          statusBox.classList.add('status-error');
+          statusBox.style.display = 'block';
+        }
+      } catch (err) {
+        statusBox.textContent = 'Error de conexión. Por favor verifica tu red e inténtalo de nuevo.';
+        statusBox.classList.add('status-error');
+        statusBox.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        if (btnText) btnText.style.display = 'inline';
+        if (btnLoader) btnLoader.style.display = 'none';
+      }
+    });
+  }
+
+  // Setup form handling and re-run on Astro View Transitions
+  document.addEventListener('astro:page-load', setupContactForm);
+</script>

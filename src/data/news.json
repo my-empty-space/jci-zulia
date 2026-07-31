@@ -7,7 +7,14 @@
     "image": "/news-congress.png",
     "slug": "congreso-mundial-jci-2026",
     "date": "2026-07-28",
-    "featured": true
+    "author": {
+      "name": "Comité de Comunicaciones JCI",
+      "role": "Prensa Internacional JCI"
+    },
+    "readTime": "5 min de lectura",
+    "featured": true,
+    "tags": ["Congreso Mundial", "Liderazgo Global", "Agenda 2030", "JCI Global"],
+    "content": "<p>La edición 2026 del <strong>Congreso Mundial JCI</strong> ha dado inicio formalmente con la participación de más de 4.000 delegados provenientes de 127 organizaciones nacionales. Este magno evento representa el epicentro anual donde jóvenes líderes, emprendedores y agentes de cambio convergen para trazar las estrategias continentales de impacto social y económico.</p><h2>Una visión compartida para los próximos diez años</h2><p>Durante la ceremonia de apertura, las autoridades mundiales enfatizaron la necesidad de profundizar las alianzas multisectoriales para responder a los desafíos globales emergentes, tales como la transformación digital responsable, el empleo joven sostenible y la transición ecológica comunitaria.</p><blockquote class=\"article-quote\">\"El liderazgo no es un título que se otorga, sino una responsabilidad colectiva que asumimos en cada una de nuestras comunidades locales para generar cambios medibles y perdurables.\"</blockquote><h2>Mesas de trabajo y resoluciones continentales</h2><p>Durante las jornadas de trabajo técnico, las delegaciones de América Latina y el Caribe presentaron avances significativos en proyectos de reactivación económica local mediante la iniciativa RISE. La delegación de JCI Zulia destacó por sus propuestas integrales en materia de capacitación directiva y emprendimiento juvenil con enfoque territorial.</p><div class=\"key-takeaways\"><h3>Puntos Clave del Congreso:</h3><ul><li><strong>Aprobación de la Declaración de Liderazgo Joven 2030:</strong> Compromiso formal para priorizar proyectos de desarrollo sostenible.</li><li><strong>Red de Innovación Abierta:</strong> Plataforma global para conectar startups comunitarias con financiamiento multilateral.</li><li><strong>Intercambio de Buenas Prácticas:</strong> Más de 80 talleres interactivos en oratoria, gobernanza empresarial y resiliencia climática.</li></ul></div><p>El congreso concluirá este fin de semana con la elección de las nuevas autoridades internacionales y la presentación de la sede oficial para el ciclo 2027.</p>"
   },
   {
     "id": "2",
@@ -17,7 +24,14 @@
     "image": "/news-rise.png",
     "slug": "iniciativa-rise-impulsa-500-empleos",
     "date": "2026-07-20",
-    "featured": false
+    "author": {
+      "name": "Equipo de Desarrollo Económico",
+      "role": "JCI Zulia"
+    },
+    "readTime": "4 min de lectura",
+    "featured": false,
+    "tags": ["JCI RISE", "Emprendimiento", "Empleo", "Economía Local"],
+    "content": "<p>La iniciativa internacional <strong>JCI RISE</strong> (Rebuild, Invest, Sustain, Evolve) ha alcanzado un hito histórico en la región tras consolidar la creación de 500 empleos directos e indirectos a través de programas intensivos de aceleración de pequeños negocios y microempresas locales.</p><h2>Mentoría y financiamiento semilla</h2><p>A través de talleres prácticos de finanzas, marketing digital y modelos de negocio ágiles, más de 60 emprendimientos locales lograron optimizar sus estructuras operativas y acceder a redes de inversión privada regional.</p><blockquote class=\"article-quote\">\"RISE demuestra que cuando brindamos herramientas y redes de acompañamiento real a los jóvenes emprendedores, el dinamismo económico de nuestras ciudades se multiplica.\"</blockquote><h2>Resultados de la primera fase</h2><p>Los sectores beneficiados abarcan la tecnología de software, servicios sostenibles, agroindustria urbana y manufactura artesanal. En los próximos meses se habilitará una nueva cohorte de incubación enfocada en proyectos de impacto ambiental.</p>"
   },
   {
     "id": "3",
@@ -27,7 +41,14 @@
     "image": "/news-toyp.png",
     "slug": "abiertas-nominaciones-toyp-2026",
     "date": "2026-07-15",
-    "featured": false
+    "author": {
+      "name": "Comité TOYP Zulia",
+      "role": "Premios & Reconocimientos"
+    },
+    "readTime": "3 min de lectura",
+    "featured": false,
+    "tags": ["TOYP 2026", "Jóvenes Sobresalientes", "Liderazgo", "Reconocimiento"],
+    "content": "<p>JCI Zulia anuncia oficialmente el inicio de la convocatoria anual del programa <strong>TOYP (Ten Outstanding Young Persons)</strong> 2026. Este programa reconoce a diez jóvenes de entre 18 y 40 años cuyas acciones extraordinarias sirven de inspiración para la sociedad.</p><h2>Categorías de postulación</h2><p>Los candidatos pueden ser postulados en diez áreas clave, entre las que destacan: Logros Médicos o de Investigación, Innovación Comercial y Económica, Servicio Comunitario y Voluntariado, y Liderazgo Académico y Ambiental.</p><blockquote class=\"article-quote\">\"Con el premio TOYP visibilizamos el trabajo silencioso pero transformador de quienes creen en un futuro mejor para todos.\"</blockquote><h2>Proceso de evaluación</h2><p>Un jurado independiente integrado por personalidades académicas, empresariales y comunitarias evaluará cada expediente evaluando el impacto, la sostenibilidad y el liderazgo ético de cada postulante.</p>"
   },
   {
     "id": "4",
@@ -37,7 +58,14 @@
     "image": "/news-congress.png",
     "slug": "cumbre-jovenes-emprendedores-creativos",
     "date": "2026-07-10",
-    "featured": false
+    "author": {
+      "name": "Comité de Innovación",
+      "role": "JCI Zulia"
+    },
+    "readTime": "4 min de lectura",
+    "featured": false,
+    "tags": ["CYE", "Startups", "Innovación", "Inversión"],
+    "content": "<p>La Cumbre de Jóvenes Emprendedores Creativos (CYE - Creative Young Entrepreneur) celebró su fase regional con la presentación de 15 proyectos finalistas ante un pánel internacional de mentores e inversionistas.</p><h2>Pitch competitions de alto nivel</h2><p>Los participantes expusieron soluciones disruptivas orientadas a la economía circular, tecnología educativa y salud comunitaria. El proyecto ganador obtuvo capital semilla para la expansión de su plataforma operacional.</p><blockquote class=\"article-quote\">\"Fomentar la creatividad empresarial es el camino más efectivo para resolver retos complejos con mentalidad ágil y sostenible.\"</blockquote>"
   },
   {
     "id": "5",
@@ -47,7 +75,14 @@
     "image": "/news-rise.png",
     "slug": "alianza-jci-zulia-ods-2030",
     "date": "2026-07-05",
-    "featured": false
+    "author": {
+      "name": "Dirección de Impacto Social",
+      "role": "JCI Zulia"
+    },
+    "readTime": "4 min de lectura",
+    "featured": false,
+    "tags": ["ODS", "Agenda 2030", "Comunidad", "Sostenibilidad"],
+    "content": "<p>Representantes de JCI Zulia sellaron un marco de cooperación multisectorial junto a líderes vecinales, ONGs locales y sectores académicos para alinear los proyectos comunitarios a los Objetivos de Desarrollo Sostenible (ODS) de la ONU.</p><h2>Foco en ODS 4, 8 y 17</h2><p>La alianza centrará sus primeros esfuerzos en programas de educación técnica de calidad (ODS 4), trabajo decente y crecimiento económico (ODS 8), fortaleciendo el tejido social mediante alianzas estratégicas (ODS 17).</p>"
   },
   {
     "id": "6",
@@ -57,7 +92,14 @@
     "image": "/news-toyp.png",
     "slug": "escuela-habilidades-liderazgo-2026",
     "date": "2026-06-28",
-    "featured": false
+    "author": {
+      "name": "Academia JCI Zulia",
+      "role": "Capacitación & Formación"
+    },
+    "readTime": "3 min de lectura",
+    "featured": false,
+    "tags": ["Capacitación", "Oratoria", "Liderazgo", "Academia"],
+    "content": "<p>Con la asistencia de más de 80 participantes culminó exitosamente el módulo inicial de la Escuela de Habilidades de Liderazgo 2026, enfocado en tecnificación de la vocería pública, negociación parlamentaria y resolución constructiva de conflictos.</p><h2>Formación práctica orientada a la acción</h2><p>Los estudiantes realizaron ejercicios simulados de debate interinstitucional y metodologías de marco lógico para la gestión transparente de proyectos de voluntariado.</p>"
   },
   {
     "id": "7",
@@ -67,7 +109,14 @@
     "image": "/news-rise.png",
     "slug": "jornada-accion-comunitaria-maracaibo",
     "date": "2026-06-20",
-    "featured": false
+    "author": {
+      "name": "Equipo de Voluntariado",
+      "role": "JCI Zulia"
+    },
+    "readTime": "3 min de lectura",
+    "featured": false,
+    "tags": ["Maracaibo", "Voluntariado", "Espacios Públicos", "Comunidad"],
+    "content": "<p>Más de 40 jóvenes voluntarios se desplegaron en sectores comunitarios de Maracaibo para revitalizar parques infantiles y realizar talleres educativos sobre reciclaje y convivencia ciudadana.</p><h2>Participación vecinal directa</h2><p>Las familias del sector se integraron activamente en las jornadas de pintura, siembra de árboles nativos y adecuación de módulos de recreación comunitaria.</p>"
   },
   {
     "id": "8",
@@ -77,7 +126,14 @@
     "image": "/news-congress.png",
     "slug": "conferencia-jci-americas-delegacion-zulia",
     "date": "2026-06-15",
-    "featured": false
+    "author": {
+      "name": "Relaciones Internacionales",
+      "role": "JCI Zulia"
+    },
+    "readTime": "5 min de lectura",
+    "featured": false,
+    "tags": ["Américas", "Relaciones Internacionales", "JCI", "Conferencia"],
+    "content": "<p>La Conferencia JCI de las Américas reunió a más de 1.500 delegados del hemisferio. La delegación de JCI Zulia presentó ponencias sobre liderazgo jóven en contextos cambiantes y redes de emprendimiento resiliente.</p><h2>Reconocimientos internacionales</h2><p>Durante la gala oficial de premiación, el capítulo regional recibió una mención honorífica por la efectividad del programa de capacitación continua y retención de voluntariado activo.</p>"
   },
   {
     "id": "9",
@@ -87,7 +143,14 @@
     "image": "/news-toyp.png",
     "slug": "dia-internacional-deberes-humanos",
     "date": "2026-06-08",
-    "featured": false
+    "author": {
+      "name": "Comité Civismo & Ciudadanía",
+      "role": "JCI Zulia"
+    },
+    "readTime": "3 min de lectura",
+    "featured": false,
+    "tags": ["Ciudadanía", "Deberes Humanos", "Responsabilidad Social", "Valores"],
+    "content": "<p>En el marco del Día Internacional de los Deberes Humanos, JCI Zulia llevó a cabo foros abiertos sobre ética, responsabilidad cívica y corresponsabilidad ciudadana en instituciones educativas regionales.</p><h2>Educación para la convivencia</h2><p>Las actividades promovieron el entendimiento de que el ejercicio pleno de nuestros derechos se fortalece mediante el cumplimiento activo de nuestras responsabilidades hacia la comunidad.</p>"
   },
   {
     "id": "10",
@@ -97,6 +160,13 @@
     "image": "/news-rise.png",
     "slug": "encuentro-networking-negocios-eticos",
     "date": "2026-06-01",
-    "featured": false
+    "author": {
+      "name": "Comité de Alianzas Privadas",
+      "role": "JCI Zulia"
+    },
+    "readTime": "4 min de lectura",
+    "featured": false,
+    "tags": ["Networking", "Negocios Éticos", "Mentoría", "Empresas"],
+    "content": "<p>Empresarios consolidados y emprendedores emergentes se congregaron en un encuentro de networking de alta frecuencia impulsado por JCI Zulia para fomentar alianzas comerciales bajo principios de responsabilidad social.</p><h2>Rondas de negocios exprés</h2><p>Más de 30 reuniones bilaterales permitieron conectar ideas de negocio innovadoras con mentores ejecutivos dispuestos a brindar asesoría estratégica y acceso a mercados.</p>"
   }
 ]
