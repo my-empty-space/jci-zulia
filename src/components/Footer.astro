@@ -1,0 +1,340 @@
+---
+import NavLink from './NavLink.astro';
+import Button from './Button.astro';
+
+const currentYear = new Date().getFullYear();
+
+const navLinks = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Nosotros', href: '/about-us' },
+  { label: 'Academia', href: '/academy' },
+  { label: 'Noticias', href: '/news' },
+  { label: 'Contacto', href: '/contact' },
+];
+---
+
+<footer class="footer-root" role="contentinfo" aria-label="Pie de página de JCI Zulia">
+  <div class="container">
+    <!-- Top Main Grid -->
+    <div class="footer-grid">
+      <!-- Column 1: Brand & Instagram -->
+      <div class="footer-col brand-col">
+        <a href="/" class="footer-brand" aria-label="JCI Zulia - Inicio">
+          <img
+            src="/logo-inverted.svg"
+            alt="JCI Zulia Logo"
+            width="150"
+            height="50"
+            class="footer-logo"
+            loading="lazy"
+          />
+        </a>
+        <p class="brand-desc">
+          Desarrollando líderes para un mundo cambiante. Organización de jóvenes
+          ciudadanos activos dedicados a crear impacto positivo en la comunidad del Estado Zulia.
+        </p>
+
+        <!-- Instagram Button Component -->
+        <Button
+          href="https://www.instagram.com/jcizuliaoficial/"
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="outline-white"
+          size="sm"
+          class="instagram-btn"
+          aria-label="Sigue a JCI Zulia en Instagram @jcizuliaoficial"
+        >
+          <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          <span>@jcizuliaoficial</span>
+        </Button>
+      </div>
+
+      <!-- Column 2: Navigation -->
+      <div class="footer-col nav-col">
+        <h2 class="col-heading">Navegación</h2>
+        <ul class="footer-nav-list">
+          {
+            navLinks.map((link) => (
+              <li>
+                <NavLink href={link.href} class="footer-link">
+                  {link.label}
+                </NavLink>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Column 3: Contact & Headquarters -->
+      <div class="footer-col contact-col">
+        <h2 class="col-heading">Contacto y Sede</h2>
+        <ul class="contact-list">
+          <li class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Maracaibo, Estado Zulia, Venezuela</span>
+          </li>
+          <li class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <a href="mailto:contacto@jcizulia.org" class="contact-mail">
+              contacto@jcizulia.org
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="footer-bottom">
+      <div class="legal-group">
+        <p class="copyright">
+          © {currentYear} JCI Zulia. Todos los derechos reservados.
+        </p>
+        <div class="legal-links">
+          <a href="/privacy" class="legal-link">Políticas de Privacidad</a>
+          <span class="legal-dot">•</span>
+          <a href="/contact" class="legal-link">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-root {
+    background-color: var(--color-jci-navy);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
+    color: var(--color-jci-white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Top accent highlight bar */
+  .footer-root::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      var(--color-jci-blue) 0%,
+      var(--color-jci-teal) 100%
+    );
+  }
+
+  /* Grid Layout - 3 balanced columns */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1.2fr;
+    gap: 4rem;
+    padding-bottom: 3.5rem;
+  }
+
+  /* Column Headings */
+  .col-heading {
+    font-family: var(--font-main);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-jci-white);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* Brand Column */
+  .brand-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-brand {
+    display: inline-block;
+    margin-bottom: 1rem;
+    transition: transform var(--transition-fast);
+  }
+
+  .footer-brand:hover {
+    transform: scale(1.02);
+  }
+
+  .footer-logo {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .brand-desc {
+    font-family: var(--font-main);
+    font-size: 0.925rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+    max-width: 420px;
+  }
+
+  /* Custom styling for Instagram Button Component */
+  .instagram-btn {
+    gap: 0.6rem;
+    border-radius: 30px;
+    padding: 0.55rem 1.25rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .instagram-icon {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    flex-shrink: 0;
+  }
+
+  /* Navigation Column */
+  .footer-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Custom styling for links inside dark footer */
+  .footer-nav-list :global(a) {
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: color var(--transition-fast) !important;
+  }
+
+  .footer-nav-list :global(a:hover) {
+    color: var(--color-jci-blue) !important;
+  }
+
+  /* Contact Column */
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-family: var(--font-main);
+    font-size: 0.925rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.45;
+  }
+
+  .contact-icon {
+    width: 18px;
+    height: 18px;
+    stroke: var(--color-jci-blue);
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .contact-mail {
+    color: var(--color-jci-white);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .contact-mail:hover {
+    color: var(--color-jci-blue);
+    text-decoration: underline;
+  }
+
+  /* Bottom Copyright Bar */
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    gap: 1.5rem;
+  }
+
+  .legal-group {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .copyright {
+    font-family: var(--font-main);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .legal-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .legal-link {
+    font-family: var(--font-main);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .legal-link:hover {
+    color: var(--color-jci-blue);
+  }
+
+  .legal-dot {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+  }
+
+  /* Responsive Breakdown */
+  @media (max-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-root {
+      padding-top: 3.5rem;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .legal-group {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+</style>
