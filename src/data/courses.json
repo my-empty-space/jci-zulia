@@ -1,0 +1,242 @@
+[
+  {
+    "id": "1",
+    "title": "Parlamentarismo y Debate",
+    "category": "Debate & Oratoria",
+    "description": "Domina las reglas del debate formal, la argumentación lógica y los procedimientos parlamentarios.",
+    "duration": "12 semanas",
+    "sessions": "24 sesiones",
+    "date": "10 Mar 2026",
+    "image": "/course-parliament.png",
+    "slug": "parlamentarismo-y-debate",
+    "modality": "Presencial / Sede JCI Zulia",
+    "level": "Intermedio / Avanzado",
+    "instructor": "Comité de Debate & Oratoria JCI",
+    "enrollUrl": "/contact?subject=Inscripcion-Parlamentarismo-y-Debate",
+    "objectives": [
+      "Comprender la estructura del procedimiento parlamentario estándar JCI.",
+      "Desarrollar habilidades avanzadas de refutación e improvisación estructurada.",
+      "Presidir asambleas y debates oficiales con rigor procedimental.",
+      "Construir mociones y argumentos con evidencia sólida."
+    ],
+    "modules": [
+      {
+        "title": "Módulo 1: Fundamentos Parlamentarios",
+        "description": "Reglas de orden, puntos de información, mociones y gestión del tiempo en asambleas."
+      },
+      {
+        "title": "Módulo 2: Lógica y Construcción de Argumentos",
+        "description": "Estructura ARE (Afirmación, Razonamiento, Evidencia) y detección de falacias lógicas."
+      },
+      {
+        "title": "Módulo 3: Refutación y Contra-argumentación",
+        "description": "Técnicas de choque directo, puntos de aclaración e impacto decisivo ante jurados."
+      },
+      {
+        "title": "Módulo 4: Simulación de Debates Nacionales e Internacionales",
+        "description": "Práctica intensiva bajo formato oficial de torneos de debate JCI."
+      }
+    ],
+    "targetAudience": "Jóvenes líderes, abogados, estudiantes de ciencias políticas, miembros JCI y cualquier profesional interesado en negociaciones formales y toma de decisiones en equipo."
+  },
+  {
+    "id": "2",
+    "title": "Oratoria e Impacto Escénico",
+    "category": "Debate & Oratoria",
+    "description": "Desarrolla técnicas avanzadas de comunicación persuasiva, control del miedo escénico y proyección vocal.",
+    "duration": "8 semanas",
+    "sessions": "16 sesiones",
+    "date": "18 Mar 2026",
+    "image": "/course-oratory.png",
+    "slug": "oratoria-e-impacto-escenico",
+    "modality": "Presencial con prácticas grabadas",
+    "level": "Todos los niveles",
+    "instructor": "Especialistas en Comunicación Efectiva",
+    "enrollUrl": "/contact?subject=Inscripcion-Oratoria-e-Impacto-Escenico",
+    "objectives": [
+      "Vencer la ansiedad y el miedo escénico mediante técnicas de respiración y presencia corporal.",
+      "Diseñar discursos memorables utilizando la estructura del Storytelling estratégico.",
+      "Modular la voz, pausar con intención y dominar el lenguaje no verbal.",
+      "Conectar emocionalmente con audiencias pequeñas y multitudinarias."
+    ],
+    "modules": [
+      {
+        "title": "Módulo 1: Dominio del Miedo Escénico y Lenguaje Corporal",
+        "description": "Postura, contacto visual, gesticulación natural y manejo del espacio."
+      },
+      {
+        "title": "Módulo 2: Arquitectura del Discurso",
+        "description": "Aperturas de alto impacto, desarrollo narrativo y cierres memorables."
+      },
+      {
+        "title": "Módulo 3: Modulación Vocal y Expresividad",
+        "description": "Tono, ritmo, proyección, pausas estratégicas y articulación clara."
+      },
+      {
+        "title": "Módulo 4: Presentación Final de Alto Impacto",
+        "description": "Exposición presencial ante jurado evaluador con feedback personalizado."
+      }
+    ],
+    "targetAudience": "Emprendedores, docentes, conferencistas emergentes y líderes comunitarios que requieran hablar en público con soltura y convicción."
+  },
+  {
+    "id": "3",
+    "title": "Gestión de Proyectos de Impacto Social",
+    "category": "Gestión & Proyectos",
+    "description": "Aprende la metodología JCI para formular, ejecutar y evaluar proyectos sostenibles alineados a los ODS.",
+    "duration": "10 semanas",
+    "sessions": "20 sesiones",
+    "date": "05 Abr 2026",
+    "image": "/course-projects.png",
+    "slug": "gestion-de-proyectos-impacto-social",
+    "modality": "Híbrido (Sesiones online + talleres presenciales)",
+    "level": "Intermedio",
+    "instructor": "Directores de Proyectos Comunitarios JCI",
+    "enrollUrl": "/contact?subject=Inscripcion-Gestion-Proyectos",
+    "objectives": [
+      "Identificar necesidades comunitarias reales aplicando la matriz de marco lógico.",
+      "Alinear proyectos a los Objetivos de Desarrollo Sostenible (ODS) de la ONU.",
+      "Gestionar presupuestos, cronogramas y alianzas estratégicas con actores clave.",
+      "Medir el impacto social mediante indicadores cualitativos y cuantitativos."
+    ],
+    "modules": [
+      {
+        "title": "Módulo 1: Diagnóstico Comunitario y Marco Lógico",
+        "description": "Árbol de problemas, árbol de objetivos y matriz de involucrados."
+      },
+      {
+        "title": "Módulo 2: Planificación Operativa y Presupuesto",
+        "description": "Cronograma de actividades, gestión de recursos y mitigación de riesgos."
+      },
+      {
+        "title": "Módulo 3: Alianzas Estratégicas y Financiamiento",
+        "description": "Patrocinios, fundraising ético y articulación con el sector público y privado."
+      },
+      {
+        "title": "Módulo 4: Evaluación de Impacto y Sostenibilidad",
+        "description": "Indicadores KPI de impacto social y estrategias de continuidad comunitaria."
+      }
+    ],
+    "targetAudience": "Coordinadores de ONG, activistas, miembros JCI y profesionales del sector público y social enfocados en generar cambios perdurables."
+  },
+  {
+    "id": "4",
+    "title": "Liderazgo Adaptativo y Gestión de Equipos",
+    "category": "Liderazgo",
+    "description": "Herramientas contemporáneas para dirigir equipos de alto rendimiento en entornos inciertos y dinámicos.",
+    "duration": "6 semanas",
+    "sessions": "12 sesiones",
+    "date": "22 Abr 2026",
+    "image": "/course-parliament.png",
+    "slug": "liderazgo-adaptativo-y-gestion-de-equipos",
+    "modality": "Presencial / Sede JCI Zulia",
+    "level": "Todos los niveles",
+    "instructor": "Formadores Certificados JCI Training",
+    "enrollUrl": "/contact?subject=Inscripcion-Liderazgo-Adaptativo",
+    "objectives": [
+      "Identificar tu estilo de liderazgo y adaptar la dirección según la madurez del equipo.",
+      "Facilitar procesos de resolución pacífica de conflictos y negociación interna.",
+      "Fomentar una cultura de retroalimentación constructiva y empoderamiento.",
+      "Tomar decisiones bajo presión manteniendo la cohesión y moral del grupo."
+    ],
+    "modules": [
+      {
+        "title": "Módulo 1: Autoconocimiento e Inteligencia Emocional",
+        "description": "Modelos de liderazgo situacional y autogestión de emociones."
+      },
+      {
+        "title": "Módulo 2: Dinámicas de Equipos de Alto Rendimiento",
+        "description": "Confianza, alineación de metas e incentivos grupales."
+      },
+      {
+        "title": "Módulo 3: Comunicación Asertiva y Manejo de Conflictos",
+        "description": "Técnicas de mediación y conversaciones difíciles."
+      },
+      {
+        "title": "Módulo 4: Ejecución Estratégica y Resiliencia",
+        "description": "Gestión del cambio, agilidad operativa y toma de decisiones."
+      }
+    ],
+    "targetAudience": "Líderes de proyectos, gerentes jóvenes, directores de organizaciones estudiantiles y emprendedores a cargo de personas."
+  },
+  {
+    "id": "5",
+    "title": "Finanzas y Sostenibilidad para Emprendedores",
+    "category": "Emprendimiento",
+    "description": "Estructura modelos de negocio viables, presupuestos financieros rigurosos y estrategias de capitalización.",
+    "duration": "8 semanas",
+    "sessions": "16 sesiones",
+    "date": "10 Mayo 2026",
+    "image": "/course-projects.png",
+    "slug": "finanzas-y-sostenibilidad-para-emprendedores",
+    "modality": "Híbrido (Clases virtuales + clínicas financieras)",
+    "level": "Intermedio",
+    "instructor": "Consultores Financieros & Red JCI RISE",
+    "enrollUrl": "/contact?subject=Inscripcion-Finanzas-Emprendedores",
+    "objectives": [
+      "Elaborar estados financieros básicos (Flujo de caja, Pérdidas y Ganancias, Balance).",
+      "Calcular el punto de equilibrio y los márgenes de rentabilidad por producto/servicio.",
+      "Diseñar estrategias de fijación de precios competitivas y sostenibles.",
+      "Presentar estados de cuenta atractivos ante potenciales inversionistas."
+    ],
+    "modules": [
+      {
+        "title": "Módulo 1: Diagnóstico Financiero e Identificación de Costos",
+        "description": "Diferencia entre costos fijos/variables y gastos operativos."
+      },
+      {
+        "title": "Módulo 2: Construcción de Flujo de Caja Proyectado",
+        "description": "Planificación de ingresos, egresos y reserva de emergencia."
+      },
+      {
+        "title": "Módulo 3: Pricing y Modelos de Monetización",
+        "description": "Valor percibido, márgenes de utilidad y escalabilidad."
+      },
+      {
+        "title": "Módulo 4: Pitch Financiero e Inversión",
+        "description": "Cómo presentar tus números ante fondos de capital y mentores."
+      }
+    ],
+    "targetAudience": "Fundadores de startups, pequeños empresarios, consultores independientes y jóvenes con proyectos de negocios en fase de incubación."
+  },
+  {
+    "id": "6",
+    "title": "Diplomacia Institucional y Protocolo JCI",
+    "category": "Diplomacia",
+    "description": "Conoce los estándares globales de representación internacional, relaciones diplomáticas y protocolo de eventos.",
+    "duration": "4 semanas",
+    "sessions": "8 sesiones",
+    "date": "01 Junio 2026",
+    "image": "/course-oratory.png",
+    "slug": "diplomacia-institucional-y-protocolo-jci",
+    "modality": "Presencial / Sede JCI Zulia",
+    "level": "Avanzado",
+    "instructor": "Comisión de Relaciones Internacionales JCI",
+    "enrollUrl": "/contact?subject=Inscripcion-Diplomacia-Protocolo",
+    "objectives": [
+      "Aplicar el protocolo oficial de la JCI en cumbres y conferencias continentales.",
+      "Manejar relaciones institucionales con embajadas, cónyuges diplomáticos y entes gubernamentales.",
+      "Dominar la precedencia, banderas, tratamientos de honor y etiqueta corporativa.",
+      "Redactar acuerdos bilaterales y convenios de colaboración interinstitucional."
+    ],
+    "modules": [
+      {
+        "title": "Módulo 1: Principios de la Diplomacia JCI y Estructura Mundial",
+        "description": "Organigrama internacional, estatutos y representaciones regionales."
+      },
+      {
+        "title": "Módulo 2: Protocolo Ceremonial y Orden de Precedencia",
+        "description": "Tratamientos, posicionamiento de banderas y normas de etiqueta."
+      },
+      {
+        "title": "Módulo 3: Negociación y Convenios Bilaterales",
+        "description": "Redacción de memorandos de entendimiento y misiones comerciales."
+      },
+      {
+        "title": "Módulo 4: Gestión de Delegaciones Internacionales",
+        "description": "Logística, acogida de autoridades y gestión de agendas diplomáticas."
+      }
+    ],
+    "targetAudience": "Miembros directivos JCI, oficiales de relaciones exteriores, profesionales de la administración pública y estudiantes de relaciones internacionales."
+  }
+]

@@ -1,28 +1,805 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+import CourseCard from '../components/CourseCard.astro';
+import Button from '../components/Button.astro';
+import IconClock from '../assets/icons/clock.svg';
+import IconSessions from '../assets/icons/sessions.svg';
+import IconCalendar from '../assets/icons/calendar.svg';
+import coursesData from '../data/courses.json';
+
+const categories = [
+  'Todas',
+  'Debate & Oratoria',
+  'Liderazgo',
+  'Gestión & Proyectos',
+  'Emprendimiento',
+  'Diplomacia',
+];
+
+// First course as spotlight featured program
+const featuredCourse = coursesData[0];
+const regularCourses = coursesData.slice(1);
 ---
 
-<Layout title="Academia - JCI Zulia">
+<Layout title="Academia de Liderazgo - JCI Zulia">
   <Navbar />
-  <main class="container page-content">
-    <h1>Academia JCI</h1>
-    <p>Programas de formación en liderazgo, emprendimiento y desarrollo personal.</p>
+
+  <main class="academy-page">
+    <!-- Hero Header with Grid Layout -->
+    <header class="academy-hero">
+      <div class="container academy-hero-grid">
+        <!-- Hero Text Left -->
+        <div class="hero-main-col">
+          <span class="academy-eyebrow">CENTRO DE FORMACIÓN Y DESARROLLO</span>
+          <h1 class="academy-title">Academia de Liderazgo y Alto Impacto</h1>
+          <p class="academy-description">
+            Potencia tus habilidades directivas, oratoria, negociación parlamentaria y gestión de proyectos sostenibles con nuestros programas certificados.
+          </p>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Catalog Section -->
+    <section class="academy-catalog-section" id="catalog" aria-label="Catálogo de Cursos">
+      <div class="container">
+        <!-- Filter Header Grid -->
+        <div class="catalog-header-grid">
+          <div class="catalog-header-text">
+            <h2 class="section-title">Programas Académicos</h2>
+            <p class="section-sub">Selecciona un área de interés para filtrar los cursos activos</p>
+          </div>
+
+          <!-- Category Filter Tabs -->
+          <div class="filter-bar" role="tablist" aria-label="Filtrar cursos por área de conocimiento">
+            {
+              categories.map((cat, index) => (
+                <button
+                  class:list={['filter-btn', { active: index === 0 }]}
+                  data-category={cat}
+                  role="tab"
+                  aria-selected={index === 0 ? 'true' : 'false'}
+                >
+                  {cat}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Featured Spotlight Program Grid Layout -->
+        <div class="featured-spotlight-wrapper" id="featuredSpotlight" data-card-category={featuredCourse.category}>
+          <div class="spotlight-card">
+            <div class="spotlight-image-box">
+              <img
+                src={featuredCourse.image}
+                alt={featuredCourse.title}
+                class="spotlight-image"
+                loading="eager"
+              />
+              <span class="spotlight-badge">PROGRAMA DESTACADO</span>
+            </div>
+
+            <div class="spotlight-content">
+              <div class="spotlight-meta-top">
+                <span class="category-pill">{featuredCourse.category}</span>
+                <span class="modality-pill">{featuredCourse.modality}</span>
+              </div>
+
+              <h3 class="spotlight-title">{featuredCourse.title}</h3>
+              <p class="spotlight-description">{featuredCourse.description}</p>
+
+              <div class="spotlight-details-grid">
+                <div class="detail-item">
+                  <IconClock class="detail-icon" />
+                  <span>{featuredCourse.duration}</span>
+                </div>
+                <div class="detail-item">
+                  <IconSessions class="detail-icon" />
+                  <span>{featuredCourse.sessions}</span>
+                </div>
+                <div class="detail-item">
+                  <IconCalendar class="detail-icon" />
+                  <span>Fecha: <strong>{featuredCourse.date}</strong></span>
+                </div>
+              </div>
+
+              <div class="spotlight-actions">
+                <Button href={featuredCourse.enrollUrl} variant="solid" size="md">
+                  Inscribirse Ahora
+                </Button>
+                <Button href={`/academy/${featuredCourse.slug}`} variant="outline" size="md">
+                  Ver Detalles Completos
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Grid Catalog (3 columns grid layout) -->
+        <div class="courses-catalog-grid" id="coursesGrid">
+          {
+            coursesData.map((course) => (
+              <div
+                class="course-card-wrapper"
+                data-card-category={course.category}
+              >
+                <CourseCard
+                  title={course.title}
+                  description={course.description}
+                  duration={course.duration}
+                  sessions={course.sessions}
+                  date={course.date}
+                  image={course.image}
+                  slug={course.slug}
+                  enrollUrl={course.enrollUrl}
+                />
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Empty State Message -->
+        <div class="empty-state" id="coursesEmptyState" hidden>
+          <p class="empty-title">No hay programas en esta categoría actualmente</p>
+          <p class="empty-sub">
+            Selecciona otra área de formación o restablece los filtros para ver el catálogo completo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Methodology 4-Column Grid -->
+    <section class="methodology-section" aria-label="Metodología JCI">
+      <div class="container">
+        <div class="methodology-header">
+          <h2 class="section-title text-center">Nuestra Metodología de Aprendizaje</h2>
+          <p class="section-sub text-center">Un enfoque prático y vivencial diseñado para desarrollar líderes reales</p>
+        </div>
+
+        <div class="methodology-grid">
+          <div class="method-card">
+            <div class="method-num">01</div>
+            <h3 class="method-title">Aprender Haciendo</h3>
+            <p class="method-text">Simulaciones de debate, ejercicios escénicos y proyectos reales desde la primera sesión.</p>
+          </div>
+
+          <div class="method-card">
+            <div class="method-num">02</div>
+            <h3 class="method-title">Feedback Personalizado</h3>
+            <p class="method-text">Evaluación continua y recomendaciones de mejora por jurados y facilitadores calificados.</p>
+          </div>
+
+          <div class="method-card">
+            <div class="method-num">03</div>
+            <h3 class="method-title">Enfoque ODS ONU</h3>
+            <p class="method-text">Contenidos alineados con los Objetivos de Desarrollo Sostenible de las Naciones Unidas.</p>
+          </div>
+
+          <div class="method-card">
+            <div class="method-num">04</div>
+            <h3 class="method-title">Certificación Oficial</h3>
+            <p class="method-text">Acredita tus horas de formación con el respaldo de la red global JCI Zulia.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Corporate Banner Grid -->
+    <section class="academy-callout-section" aria-label="Formación Corporativa">
+      <div class="container">
+        <div class="callout-grid-card">
+          <div class="callout-content">
+            <span class="callout-tag">SOLUCIONES A MEDIDA</span>
+            <h2 class="callout-title">Capacitación Corporativa y Talleres para Organizaciones</h2>
+            <p class="callout-text">
+              Llevamos nuestros programas de oratoria, negociación, trabajo en equipo y liderazgo adaptativo directamente a tu empresa o universidad.
+            </p>
+          </div>
+          <div class="callout-cta-box">
+            <a href="/contact?subject=Capacitacion-Corporativa" class="callout-btn" data-astro-prefetch="hover">
+              Solicitar Formación Corporativa
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
 
 <style>
-  .page-content {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+  .academy-page {
+    background-color: var(--color-gray-50);
+    min-height: 80vh;
   }
-  h1 {
-    font-size: 2.5rem;
+
+  .text-center {
+    text-align: center;
+  }
+
+  /* Hero Split Grid */
+  .academy-hero {
+    background-color: var(--color-jci-black);
+    color: var(--color-jci-white);
+    padding: 5rem 0 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .academy-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 100%;
+    background: radial-gradient(
+      circle at top right,
+      rgba(0, 151, 215, 0.28) 0%,
+      rgba(19, 15, 45, 0) 70%
+    );
+    pointer-events: none;
+  }
+
+  .academy-hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .academy-eyebrow {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-jci-teal);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .academy-title {
+    font-family: var(--font-main);
+    font-size: clamp(2.25rem, 4.2vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--color-jci-white);
+  }
+
+  .academy-description {
+    margin-top: 1.25rem;
+    font-family: var(--font-main);
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .hero-actions {
+    margin-top: 2.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* 2x2 Stats / Highlights Grid */
+  .hero-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 151, 215, 0.4);
+    background: rgba(255, 255, 255, 0.09);
+  }
+
+  .stat-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .stat-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-title {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-jci-white);
+  }
+
+  .stat-sub {
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.15rem;
+  }
+
+  /* Catalog Section */
+  .academy-catalog-section {
+    padding: 5rem 0 6rem;
+  }
+
+  .catalog-header-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: var(--font-main);
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
     color: var(--color-jci-black);
-    margin-bottom: 1rem;
   }
-  p {
-    font-size: 1.15rem;
+
+  .section-sub {
+    margin-top: 0.4rem;
+    font-family: var(--font-main);
+    font-size: 1rem;
     color: var(--color-gray-600);
   }
+
+  /* Filter Pills */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .filter-btn {
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.55rem 1.25rem;
+    border-radius: 30px;
+    background-color: var(--color-jci-white);
+    color: var(--color-gray-600);
+    border: 1px solid var(--color-gray-200);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-jci-blue);
+    color: var(--color-jci-blue);
+  }
+
+  .filter-btn.active {
+    background-color: var(--color-jci-blue);
+    color: var(--color-jci-white);
+    border-color: var(--color-jci-blue);
+    box-shadow: 0 4px 14px rgba(0, 151, 215, 0.28);
+  }
+
+  /* Featured Spotlight Banner Card */
+  .featured-spotlight-wrapper {
+    margin-bottom: 3rem;
+    transition: opacity var(--transition-normal);
+  }
+
+  .featured-spotlight-wrapper.hidden {
+    display: none;
+  }
+
+  .spotlight-card {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    background-color: var(--color-jci-white);
+    border-radius: 16px;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(19, 15, 45, 0.06);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  }
+
+  .spotlight-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(19, 15, 45, 0.1);
+  }
+
+  .spotlight-image-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+  }
+
+  .spotlight-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .spotlight-badge {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    background-color: var(--color-jci-blue);
+    color: var(--color-jci-white);
+    font-family: var(--font-main);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 151, 215, 0.3);
+  }
+
+  .spotlight-content {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .spotlight-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+  }
+
+  .category-pill {
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-jci-blue);
+    background-color: rgba(0, 151, 215, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+  }
+
+  .modality-pill {
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-gray-600);
+  }
+
+  .spotlight-title {
+    font-family: var(--font-main);
+    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--color-jci-black);
+  }
+
+  .spotlight-description {
+    margin-top: 0.85rem;
+    font-family: var(--font-main);
+    font-size: 0.975rem;
+    line-height: 1.6;
+    color: var(--color-gray-600);
+  }
+
+  .spotlight-details-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px dashed var(--color-gray-200);
+  }
+
+  .detail-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-main);
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .detail-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-jci-blue);
+  }
+
+  .spotlight-actions {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  /* Catalog 3-Column Grid */
+  .courses-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .course-card-wrapper {
+    transition: opacity var(--transition-normal);
+  }
+
+  .course-card-wrapper.hidden {
+    display: none;
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--color-jci-white);
+    border-radius: 16px;
+    border: 1px dashed var(--color-gray-200);
+  }
+
+  .empty-title {
+    font-family: var(--font-main);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-gray-600);
+  }
+
+  .empty-sub {
+    margin-top: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: var(--color-gray-600);
+  }
+
+  /* Methodology Section 4-Column Grid */
+  .methodology-section {
+    padding: 5rem 0;
+    background-color: var(--color-jci-white);
+    border-top: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+
+  .methodology-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+  }
+
+  .method-card {
+    background-color: var(--color-gray-50);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    border: 1px solid var(--color-gray-200);
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .method-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-jci-blue);
+  }
+
+  .method-num {
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-jci-blue);
+    opacity: 0.8;
+  }
+
+  .method-title {
+    margin-top: 0.75rem;
+    font-family: var(--font-main);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-jci-black);
+  }
+
+  .method-text {
+    margin-top: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-gray-600);
+  }
+
+  /* Bottom Corporate Callout Card Grid */
+  .academy-callout-section {
+    padding: 6rem 0;
+  }
+
+  .callout-grid-card {
+    background: linear-gradient(135deg, var(--color-jci-blue) 0%, var(--color-jci-navy) 100%);
+    border-radius: 16px;
+    padding: 3.5rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 3rem;
+    color: var(--color-jci-white);
+    box-shadow: 0 16px 40px rgba(19, 15, 45, 0.12);
+  }
+
+  .callout-tag {
+    font-family: var(--font-main);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--color-jci-teal);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .callout-title {
+    font-family: var(--font-main);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--color-jci-white);
+  }
+
+  .callout-text {
+    margin-top: 0.75rem;
+    font-family: var(--font-main);
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .callout-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.9rem 1.75rem;
+    border-radius: 6px;
+    background-color: var(--color-jci-white);
+    color: var(--color-jci-blue);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  .callout-btn:hover {
+    background-color: var(--color-gray-50);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Responsive Breakdown */
+  @media (max-width: 1024px) {
+    .academy-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .spotlight-card {
+      grid-template-columns: 1fr;
+    }
+
+    .courses-catalog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .methodology-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .callout-grid-card {
+      grid-template-columns: 1fr;
+      padding: 2.5rem;
+      gap: 1.75rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .courses-catalog-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .methodology-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .spotlight-content {
+      padding: 1.5rem;
+    }
+
+    .spotlight-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .spotlight-actions :global(.btn) {
+      width: 100%;
+    }
+
+    .callout-btn {
+      width: 100%;
+    }
+  }
 </style>
+
+<script>
+  function setupCourseFiltering() {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const cardWrappers = document.querySelectorAll<HTMLElement>('.course-card-wrapper');
+    const featuredSpotlight = document.getElementById('featuredSpotlight');
+    const emptyState = document.getElementById('coursesEmptyState');
+
+    if (!filterBtns.length || !cardWrappers.length) return;
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+
+        // Update button active styles
+        filterBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        let visibleCount = 0;
+
+        // Spotlight card visibility
+        if (featuredSpotlight) {
+          const spotlightCategory = featuredSpotlight.getAttribute('data-card-category');
+          if (category === 'Todas' || spotlightCategory === category) {
+            featuredSpotlight.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            featuredSpotlight.classList.add('hidden');
+          }
+        }
+
+        // Card grid visibility
+        cardWrappers.forEach((wrapper) => {
+          const cardCategory = wrapper.getAttribute('data-card-category');
+
+          if (category === 'Todas' || cardCategory === category) {
+            wrapper.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            wrapper.classList.add('hidden');
+          }
+        });
+
+        // Show or hide empty state
+        if (emptyState) {
+          emptyState.hidden = visibleCount > 0;
+        }
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupCourseFiltering);
+  document.addEventListener('astro:page-load', setupCourseFiltering);
+</script>

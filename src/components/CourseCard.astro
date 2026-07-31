@@ -1,0 +1,227 @@
+---
+import IconClock from '../assets/icons/clock.svg';
+import IconSessions from '../assets/icons/sessions.svg';
+import IconCalendar from '../assets/icons/calendar.svg';
+import Button from './Button.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  duration: string;
+  sessions: string;
+  date: string;
+  image: string;
+  slug: string;
+  enrollUrl?: string;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  duration,
+  sessions,
+  date,
+  image,
+  slug,
+  enrollUrl = '/contact',
+  class: className = '',
+} = Astro.props;
+
+const infoUrl = `/academy/${slug}`;
+---
+
+<article class:list={['course-card', className]}>
+  <div class="course-card-inner">
+    <!-- Top Image Cover -->
+    <div class="course-image-wrapper">
+      <img
+        src={image}
+        alt={title}
+        class="course-image"
+        loading="lazy"
+        width="400"
+        height="225"
+      />
+    </div>
+
+    <!-- Content Area -->
+    <div class="course-content">
+      <h3 class="course-title">{title}</h3>
+      <p class="course-description">{description}</p>
+
+      <!-- Meta Information Grid -->
+      <div class="course-meta">
+        <div class="meta-row meta-row--duo">
+          <div class="meta-item">
+            <IconClock class="meta-icon" />
+            <span>{duration}</span>
+          </div>
+          <div class="meta-item">
+            <IconSessions class="meta-icon" />
+            <span>{sessions}</span>
+          </div>
+        </div>
+
+        <div class="meta-row">
+          <div class="meta-item">
+            <IconCalendar class="meta-icon" />
+            <span>Fecha: <strong class="date-highlight">{date}</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="course-actions">
+        <Button href={enrollUrl} variant="solid" size="sm" class="action-btn">
+          Inscribirse
+        </Button>
+        <Button href={infoUrl} variant="outline" size="sm" class="action-btn">
+          Ver Más Información
+        </Button>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .course-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 16px;
+    background-color: var(--color-jci-white);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+    overflow: hidden;
+  }
+
+  .course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(19, 15, 45, 0.08);
+    border-color: rgba(0, 151, 215, 0.25);
+  }
+
+  .course-card-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.25rem;
+  }
+
+  /* Top Image Box */
+  .course-image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background-color: var(--color-gray-100);
+  }
+
+  .course-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms ease-in-out;
+  }
+
+  .course-card:hover .course-image {
+    transform: scale(1.04);
+  }
+
+  /* Content Box */
+  .course-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: 1.25rem;
+  }
+
+  .course-title {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-jci-black);
+  }
+
+  .course-description {
+    margin-top: 0.65rem;
+    font-family: var(--font-main);
+    font-size: 0.925rem;
+    line-height: 1.55;
+    color: var(--color-gray-600);
+    flex: 1;
+  }
+
+  /* Meta Section */
+  .course-meta {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--color-gray-200);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .meta-row--duo {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-main);
+    font-size: 0.875rem;
+    color: #8896a6;
+    font-weight: 500;
+  }
+
+  .meta-icon {
+    width: 16px;
+    height: 16px;
+    color: #94a3b8;
+    flex-shrink: 0;
+  }
+
+  .date-highlight {
+    color: var(--color-jci-blue);
+    font-weight: 700;
+  }
+
+  /* Actions */
+  .course-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .course-actions :global(.action-btn) {
+    font-size: 0.85rem;
+    padding: 0.55rem 1rem;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 480px) {
+    .course-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .course-actions :global(.action-btn) {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,142 @@
+---
+import CourseCard from '../components/CourseCard.astro';
+import IconNewTab from '../assets/icons/newtab.svg';
+import coursesData from '../data/courses.json';
+
+// Take latest courses preview
+const latestCourses = coursesData.slice(0, 3);
+---
+
+<section class="latest-courses-section" aria-label="Cursos y Talleres Destacados">
+  <div class="container latest-courses-container">
+    <!-- Header: Title + Subtitle Left, "Ver todos los cursos" Right -->
+    <div class="latest-courses-header">
+      <div class="header-text">
+        <h2 class="section-title">Cursos y talleres</h2>
+        <p class="section-subtitle">
+          Potencia tu liderazgo y adquiere nuevas competencias con nuestros programas certificados.
+        </p>
+      </div>
+
+      <a href="/academy" class="see-all-link" data-astro-prefetch="hover">
+        <span>Ver todos los cursos</span>
+        <IconNewTab class="newtab-icon" />
+      </a>
+    </div>
+
+    <!-- Courses Grid: 3 columns -->
+    <div class="courses-grid">
+      {
+        latestCourses.map((course) => (
+          <CourseCard
+            title={course.title}
+            description={course.description}
+            duration={course.duration}
+            sessions={course.sessions}
+            date={course.date}
+            image={course.image}
+            slug={course.slug}
+            enrollUrl={course.enrollUrl}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .latest-courses-section {
+    background-color: var(--color-jci-white);
+    padding: 6rem 0;
+  }
+
+  .latest-courses-container {
+    position: relative;
+  }
+
+  /* Header Layout */
+  .latest-courses-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: var(--font-main);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-jci-black);
+  }
+
+  .section-subtitle {
+    margin-top: 0.65rem;
+    font-family: var(--font-main);
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    color: var(--color-gray-600);
+  }
+
+  .see-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-jci-blue);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .see-all-link:hover {
+    color: var(--color-jci-blue-hover);
+  }
+
+  .see-all-link :global(svg) {
+    width: 16px;
+    height: 16px;
+    display: block;
+    transition: transform var(--transition-fast);
+  }
+
+  .see-all-link:hover :global(svg) {
+    transform: translate(2px, -2px);
+  }
+
+  /* Grid Layout: 3 Columns on Desktop */
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+
+  /* Responsive Breakdown */
+  @media (max-width: 992px) {
+    .courses-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .latest-courses-section {
+      padding: 4rem 0;
+    }
+
+    .latest-courses-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .courses-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>
