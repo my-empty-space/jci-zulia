@@ -63,7 +63,7 @@ const categories = [
                   excerpt={article.excerpt}
                   image={article.image}
                   slug={article.slug}
-                  featured={index === 0}
+                  featured={article.featured}
                 />
               </div>
             ))
@@ -285,10 +285,10 @@ const categories = [
   .callout-card {
     background: linear-gradient(
       135deg,
-      var(--color-jci-black) 0%,
+      var(--color-jci-blue) 0%,
       var(--color-jci-navy) 100%
     );
-    border-radius: 20px;
+    border-radius: 14px;
     padding: 3rem 3.5rem;
     display: flex;
     align-items: center;
