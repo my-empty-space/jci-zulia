@@ -1,28 +1,435 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+import NewsCard from '../components/NewsCard.astro';
+import newsData from '../data/news.json';
+
+const categories = [
+  'Todas',
+  'Eventos Globales',
+  'Emprendimiento',
+  'Liderazgo',
+  'Acción Comunitaria',
+];
 ---
 
-<Layout title="Noticias - JCI Zulia">
+<Layout title="Noticias de Impacto - JCI Zulia">
   <Navbar />
-  <main class="container page-content">
-    <h1>Noticias y Eventos</h1>
-    <p>Mantente al día con las últimas actividades e iniciativas de la JCI Zulia.</p>
+
+  <main class="news-page">
+    <!-- Hero Header -->
+    <header class="news-hero">
+      <div class="container news-hero-container">
+        <div class="news-hero-content">
+          <span class="news-eyebrow">ACTUALIDAD Y COMUNICACIÓN</span>
+          <h1 class="news-title">Noticias de Impacto</h1>
+          <p class="news-description">
+            Explora las últimas historias de liderazgo, iniciativas de desarrollo
+            económico y eventos globales impulsados por la comunidad de JCI Zulia.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Interactive Filter & Catalog Section -->
+    <section class="news-catalog-section" aria-label="Catálogo de Noticias">
+      <div class="container">
+        <!-- Category Filter Tabs -->
+        <div class="filter-bar" role="tablist" aria-label="Filtrar por categoría">
+          {
+            categories.map((cat, index) => (
+              <button
+                class:list={['filter-btn', { active: index === 0 }]}
+                data-category={cat}
+                role="tab"
+                aria-selected={index === 0 ? 'true' : 'false'}
+              >
+                {cat}
+              </button>
+            ))
+          }
+        </div>
+
+        <!-- News Catalog Grid -->
+        <div class="news-catalog-grid" id="newsGrid">
+          {
+            newsData.map((article, index) => (
+              <div
+                class="news-card-wrapper"
+                data-card-category={article.category}
+              >
+                <NewsCard
+                  title={article.title}
+                  excerpt={article.excerpt}
+                  image={article.image}
+                  slug={article.slug}
+                  featured={index === 0}
+                />
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Empty State Message (Hidden by default) -->
+        <div class="empty-state" id="emptyState" hidden>
+          <p class="empty-title">No hay publicaciones en esta categoría</p>
+          <p class="empty-sub">
+            Selecciona otra categoría o restablece el filtro para ver más historias.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Community Callout -->
+    <section class="news-callout-section" aria-label="Únete a la Red">
+      <div class="container">
+        <div class="callout-card">
+          <div class="callout-content">
+            <h2 class="callout-title">¿Tienes una historia de impacto?</h2>
+            <p class="callout-text">
+              Forma parte de la principal red global de jóvenes líderes. Sé protagonista
+              del cambio en tu comunidad.
+            </p>
+          </div>
+          <a href="/contact" class="callout-btn" data-astro-prefetch="hover">
+            Únete a JCI Zulia
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
 
 <style>
-  .page-content {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+  .news-page {
+    background-color: var(--color-gray-50);
+    min-height: 80vh;
   }
-  h1 {
-    font-size: 2.5rem;
-    color: var(--color-jci-black);
-    margin-bottom: 1rem;
+
+  /* Hero Header */
+  .news-hero {
+    background-color: var(--color-jci-black);
+    color: var(--color-jci-white);
+    padding: 5rem 0 4rem;
+    position: relative;
+    overflow: hidden;
   }
-  p {
-    font-size: 1.15rem;
+
+  .news-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45vw;
+    height: 100%;
+    background: radial-gradient(
+      circle at top right,
+      rgba(0, 151, 215, 0.25) 0%,
+      rgba(19, 15, 45, 0) 70%
+    );
+    pointer-events: none;
+  }
+
+  .news-hero-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .news-hero-content {
+    max-width: 680px;
+  }
+
+  .news-eyebrow {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-jci-teal);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .news-title {
+    font-family: var(--font-main);
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-jci-white);
+  }
+
+  .news-description {
+    margin-top: 1.25rem;
+    font-family: var(--font-main);
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .news-counter-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 1.25rem 1.75rem;
+    border-radius: 14px;
+    backdrop-filter: blur(8px);
+    flex-shrink: 0;
+  }
+
+  .pill-number {
+    font-family: var(--font-main);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--color-jci-blue);
+    line-height: 1;
+  }
+
+  .pill-text {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.35rem;
+    white-space: nowrap;
+  }
+
+  /* Filter & Catalog Section */
+  .news-catalog-section {
+    padding: 4rem 0 6rem;
+  }
+
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .filter-btn {
+    font-family: var(--font-main);
+    font-size: 0.925rem;
+    font-weight: 600;
+    padding: 0.6rem 1.25rem;
+    border-radius: 30px;
+    background-color: var(--color-jci-white);
+    color: var(--color-gray-600);
+    border: 1px solid var(--color-gray-200);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-jci-blue);
+    color: var(--color-jci-blue);
+  }
+
+  .filter-btn.active {
+    background-color: var(--color-jci-blue);
+    color: var(--color-jci-white);
+    border-color: var(--color-jci-blue);
+    box-shadow: 0 4px 12px rgba(0, 151, 215, 0.25);
+  }
+
+  /* Catalog Grid */
+  .news-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .news-card-wrapper {
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+  }
+
+  .news-card-wrapper.hidden {
+    display: none;
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--color-jci-white);
+    border-radius: 16px;
+    border: 1px dashed var(--color-gray-200);
+  }
+
+  .empty-title {
+    font-family: var(--font-main);
+    font-size: 1.25rem;
+    font-weight: 700;
     color: var(--color-gray-600);
   }
+
+  .empty-sub {
+    margin-top: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: var(--color-gray-600);
+  }
+
+  /* Bottom Callout */
+  .news-callout-section {
+    padding-bottom: 6rem;
+  }
+
+  .callout-card {
+    background: linear-gradient(
+      135deg,
+      var(--color-jci-black) 0%,
+      var(--color-jci-navy) 100%
+    );
+    border-radius: 20px;
+    padding: 3rem 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    color: var(--color-jci-white);
+    box-shadow: 0 16px 40px rgba(19, 15, 45, 0.12);
+  }
+
+  .callout-content {
+    max-width: 600px;
+  }
+
+  .callout-title {
+    font-family: var(--font-main);
+    font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--color-jci-white);
+  }
+
+  .callout-text {
+    margin-top: 0.75rem;
+    font-family: var(--font-main);
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .callout-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.85rem 1.8rem;
+    border-radius: 6px;
+    background-color: var(--color-jci-blue);
+    color: var(--color-jci-white);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0, 151, 215, 0.35);
+    flex-shrink: 0;
+  }
+
+  .callout-btn:hover {
+    background-color: var(--color-jci-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 151, 215, 0.45);
+  }
+
+  /* Responsive Breakdown */
+  @media (max-width: 992px) {
+    .news-catalog-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .callout-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 2.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .news-hero-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .news-counter-pill {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+    }
+
+    .pill-number {
+      font-size: 1.75rem;
+    }
+
+    .news-catalog-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .callout-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .callout-btn {
+      width: 100%;
+    }
+  }
 </style>
+
+<script>
+  function setupCategoryFiltering() {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const cardWrappers = document.querySelectorAll<HTMLElement>('.news-card-wrapper');
+    const emptyState = document.getElementById('emptyState');
+
+    if (!filterBtns.length || !cardWrappers.length) return;
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+
+        // Update active state on buttons
+        filterBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        let visibleCount = 0;
+
+        // Filter news cards
+        cardWrappers.forEach((wrapper) => {
+          const cardCategory = wrapper.getAttribute('data-card-category');
+
+          if (category === 'Todas' || cardCategory === category) {
+            wrapper.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            wrapper.classList.add('hidden');
+          }
+        });
+
+        // Show/hide empty state
+        if (emptyState) {
+          emptyState.hidden = visibleCount > 0;
+        }
+      });
+    });
+  }
+
+  // Run script on page load and view transitions navigation
+  document.addEventListener('DOMContentLoaded', setupCategoryFiltering);
+  document.addEventListener('astro:page-load', setupCategoryFiltering);
+</script>

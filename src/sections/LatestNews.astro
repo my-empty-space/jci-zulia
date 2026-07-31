@@ -1,0 +1,139 @@
+---
+import NewsCard from '../components/NewsCard.astro';
+import IconNewTab from '../assets/icons/newtab.svg';
+import newsData from '../data/news.json';
+
+// Take first 5 items for Home page preview
+const latestNews = newsData.slice(0, 5);
+---
+
+<section class="latest-news-section" aria-label="Noticias de Impacto">
+  <div class="container latest-news-container">
+    <!-- Header: Title + Subtitle Left, "Ver todas las noticias" Right -->
+    <div class="latest-news-header">
+      <div class="header-text">
+        <h2 class="section-title">Noticias de impacto</h2>
+        <p class="section-subtitle">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </p>
+      </div>
+
+      <a href="/news" class="see-all-link" data-astro-prefetch="hover">
+        <span>Ver todas las noticias</span>
+        <IconNewTab class="newtab-icon" />
+      </a>
+    </div>
+
+    <!-- News Grid: 3 columns (Row 1: Featured 2 cols + 1 col; Row 2: 3 cols) -->
+    <div class="news-grid">
+      {
+        latestNews.map((article, index) => (
+          <NewsCard
+            title={article.title}
+            excerpt={article.excerpt}
+            image={article.image}
+            slug={article.slug}
+            featured={index === 0}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .latest-news-section {
+    background-color: var(--color-gray-50);
+    padding: 6rem 0;
+  }
+
+  .latest-news-container {
+    position: relative;
+  }
+
+  /* Header Layout */
+  .latest-news-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: var(--font-main);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-gray-600);
+  }
+
+  .section-subtitle {
+    margin-top: 0.65rem;
+    font-family: var(--font-main);
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    color: var(--color-gray-600);
+  }
+
+  .see-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-jci-blue);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .see-all-link:hover {
+    color: var(--color-jci-blue-hover);
+  }
+
+  .see-all-link :global(svg) {
+    width: 16px;
+    height: 16px;
+    display: block;
+    transition: transform var(--transition-fast);
+  }
+
+  .see-all-link:hover :global(svg) {
+    transform: translate(2px, -2px);
+  }
+
+  /* Grid Layout: 3 Columns on Desktop */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+
+  /* Responsive Breakdown */
+  @media (max-width: 992px) {
+    .news-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .latest-news-section {
+      padding: 4rem 0;
+    }
+
+    .latest-news-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .news-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

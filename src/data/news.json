@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "title": "Congreso Mundial JCI 2026: Tejiendo el futuro del liderazgo",
+    "excerpt": "Delegados de 127 países se reúnen para definir la agenda de impacto joven para la próxima década.",
+    "category": "Eventos Globales",
+    "image": "/news-congress.png",
+    "slug": "congreso-mundial-jci-2026",
+    "date": "2026-07-28",
+    "featured": true
+  },
+  {
+    "id": "2",
+    "title": "Iniciativa RISE impulsa 500 nuevos empleos locales",
+    "excerpt": "El programa JCI RISE continúa su expansión apoyando a pequeños emprendedores en su reactivación económica.",
+    "category": "Emprendimiento",
+    "image": "/news-rise.png",
+    "slug": "iniciativa-rise-impulsa-500-empleos",
+    "date": "2026-07-20",
+    "featured": false
+  },
+  {
+    "id": "3",
+    "title": "Abiertas las nominaciones para los 10 Jóvenes Sobresalientes",
+    "excerpt": "Buscamos a los ciudadanos activos menores de 40 años que están transformando su entorno con innovación y coraje.",
+    "category": "Liderazgo",
+    "image": "/news-toyp.png",
+    "slug": "abiertas-nominaciones-toyp-2026",
+    "date": "2026-07-15",
+    "featured": false
+  },
+  {
+    "id": "4",
+    "title": "Cumbre de Jóvenes Emprendedores Creativos (CYE)",
+    "excerpt": "Jóvenes innovadores presentaron sus modelos de negocio sostenibles ante jurados e inversionistas internacionales.",
+    "category": "Emprendimiento",
+    "image": "/news-congress.png",
+    "slug": "cumbre-jovenes-emprendedores-creativos",
+    "date": "2026-07-10",
+    "featured": false
+  },
+  {
+    "id": "5",
+    "title": "Alianza JCI Zulia y sectores comunitarios por los ODS",
+    "excerpt": "Proyectos locales en Zulia se alinean con la Agenda 2030 para generar cambios medibles en las comunidades.",
+    "category": "Acción Comunitaria",
+    "image": "/news-rise.png",
+    "slug": "alianza-jci-zulia-ods-2030",
+    "date": "2026-07-05",
+    "featured": false
+  },
+  {
+    "id": "6",
+    "title": "Escuela de Habilidades de Liderazgo 2026",
+    "excerpt": "Taller intensivo de oratoria, debate y gestión de proyectos para nuevos miembros y líderes emergentes.",
+    "category": "Liderazgo",
+    "image": "/news-toyp.png",
+    "slug": "escuela-habilidades-liderazgo-2026",
+    "date": "2026-06-28",
+    "featured": false
+  },
+  {
+    "id": "7",
+    "title": "Jornada de Acción Comunitaria en Maracaibo",
+    "excerpt": "Voluntarios de JCI Zulia transforman espacios públicos en zonas de esparcimiento seguro para niños.",
+    "category": "Acción Comunitaria",
+    "image": "/news-rise.png",
+    "slug": "jornada-accion-comunitaria-maracaibo",
+    "date": "2026-06-20",
+    "featured": false
+  },
+  {
+    "id": "8",
+    "title": "Conferencia JCI de las Américas: Delegación Zulia presente",
+    "excerpt": "Nuestros representantes compartieron casos de éxito y fortalecieron alianzas internacionales en el continente.",
+    "category": "Eventos Globales",
+    "image": "/news-congress.png",
+    "slug": "conferencia-jci-americas-delegacion-zulia",
+    "date": "2026-06-15",
+    "featured": false
+  },
+  {
+    "id": "9",
+    "title": "Día Internacional de los Deberes Humanos",
+    "excerpt": "Campañas de concientización ciudadana promoviendo la responsabilidad social y los derechos de todos.",
+    "category": "Acción Comunitaria",
+    "image": "/news-toyp.png",
+    "slug": "dia-internacional-deberes-humanos",
+    "date": "2026-06-08",
+    "featured": false
+  },
+  {
+    "id": "10",
+    "title": "Encuentro de Networking y Negocios Éticos",
+    "excerpt": "Espacio de conexión entre jóvenes emprendedores y mentores del sector privado para impulsar proyectos de impacto.",
+    "category": "Emprendimiento",
+    "image": "/news-rise.png",
+    "slug": "encuentro-networking-negocios-eticos",
+    "date": "2026-06-01",
+    "featured": false
+  }
+]
